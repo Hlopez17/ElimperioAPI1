@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ELIMPERIOBARYCAFE.Cosina"
+             BackgroundColor="white">
+
+    <!-- Definir ScrollView para permitir el desplazamiento -->
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10" VerticalOptions="FillAndExpand">
+
+            <AbsoluteLayout HorizontalOptions="FillAndExpand">
+                <!-- Botón de tres puntos-->
+                <ImageButton Source="tres_puntos.png"
+                             Clicked="OnMenuClicked"
+                             WidthRequest="5"  
+                             HeightRequest="5"
+                             BackgroundColor="Transparent" 
+                             AbsoluteLayout.LayoutBounds="1,0,AutoSize,AutoSize"
+                             AbsoluteLayout.LayoutFlags="PositionProportional" />
+            </AbsoluteLayout>
+
+            <!-- Frame para el logo -->
+            <Frame HeightRequest="120"
+                   WidthRequest="120"
+                   CornerRadius="60"
+                   BorderColor="Black"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Start"
+                   Padding="0"
+                   Margin="0, 10">
+                <Image Source="logo_bar.png"
+                       Aspect="AspectFit"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+            </Frame>
+
+            <!-- Número de Orden -->
+            <Label Text="Pedidos #4773"
+                   FontSize="20"
+                   TextColor="Black"
+                   Margin="0,0,0,10"/>
+
+            <!-- Opciones de tipo de pedido -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Button Text="Pedidos"
+                        BackgroundColor="Black"
+                        TextColor="White"
+                        CornerRadius="20"
+                        Margin="0,0,10,0"
+                        HeightRequest="35"
+                        FontSize="13"/>
+                <Button Text="Notificaciones"
+                        BackgroundColor="Black"
+                        TextColor="White"
+                        CornerRadius="20"
+                        Margin="0,0,10,0"
+                        HeightRequest="35"
+                        FontSize="13"/>
+            </StackLayout>
+
+            <!-- Título de columnas -->
+            <Grid ColumnDefinitions="*, Auto, Auto" Margin="0,20,0,10">
+                <Label Text="Orden" TextColor="Black" FontSize="18"/>
+                <Label Text="Cantidad" TextColor="Black" FontSize="18" HorizontalOptions="End" Grid.Column="1"/>
+            </Grid>
+
+            <!-- Divider -->
+            <BoxView HeightRequest="1" BackgroundColor="#3A3A44" />
+
+            <!-- Lista de Items -->
+            <CollectionView ItemsSource="{Binding OrderItems}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="Auto, *, Auto, Auto" Padding="0,10">
+                            <!-- Imagen del item (se puede agregar aquí) -->
+
+                            <!-- Nombre del item -->
+                            <StackLayout Grid.Column="1">
+                                <Label Text="{Binding Name}" TextColor="Black" FontSize="16"/>
+                                <Label Text="{Binding Price, StringFormat='${0:F2}'}" TextColor="#888888" FontSize="14"/>
+                            </StackLayout>
+
+                            <!-- Cantidad -->
+                            <Entry Text="{Binding Quantity}" WidthRequest="60"
+                                   TextColor="Black" BackgroundColor="LightGray"
+                                   HorizontalOptions="End" Grid.Column="2"/>
+
+                            <!-- Precio -->
+                            <Label Text="{Binding TotalPrice, StringFormat='${0:F2}'}" TextColor="Black"
+                                   FontSize="16" HorizontalOptions="End" Grid.Column="3"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Botón para realizar el pedido -->
+            <Button Text="Realizar Pedido"
+                    BackgroundColor="Black"
+                    TextColor="White"
+                    HeightRequest="35"
+                    CornerRadius="20"
+                    VerticalOptions="EndAndExpand"
+                    Margin="0,30,0,0"
+                    FontSize="13"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

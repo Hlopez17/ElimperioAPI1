@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ELIMPERIOBARYCAFE.Eventos"
+             BackgroundColor="White">
+
+    <!-- Layout principal -->
+    <VerticalStackLayout Padding="20" Spacing="15" VerticalOptions="FillAndExpand">
+
+        <!-- Encabezado -->
+        <Label Text="Mesas Disponibles"
+               FontAttributes="Bold"
+               FontSize="24"
+               TextColor="Black"
+               HorizontalOptions="Center" />
+
+        <!-- Lista de Mesas Disponibles -->
+        <CollectionView x:Name="MesasCollectionView"
+                        ItemsSource="{Binding Mesas}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding MesaSeleccionada}"
+                        Margin="0,10,0,10">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="Gray" CornerRadius="10" HasShadow="True" Padding="10" Margin="5">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding NombreMesa}" FontSize="20" TextColor="Black"/>
+                            <Label Text="{Binding Estado}" FontSize="16" TextColor="Gray"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Botón para agregar un pedido -->
+        <Button Text="Agregar Pedido"
+                BackgroundColor="Green"
+                TextColor="White"
+                HeightRequest="40"
+                CornerRadius="20"
+                Command="{Binding AgregarPedidoCommand}"
+                HorizontalOptions="Center" />
+
+        <!-- Botón para confirmar reserva -->
+        <Button Text="Confirmar Reserva"
+                BackgroundColor="Black"
+                TextColor="White"
+                HeightRequest="40"
+                CornerRadius="20"
+                Command="{Binding ConfirmarReservaCommand}"
+                HorizontalOptions="Center" />
+
+        <!-- Mensaje de estado -->
+        <Label x:Name="EstadoLabel" 
+               Text="{Binding EstadoMensaje}" 
+               TextColor="Black" 
+               FontAttributes="Italic" 
+               HorizontalOptions="Center" />
+    </VerticalStackLayout>
+
+</ContentPage>

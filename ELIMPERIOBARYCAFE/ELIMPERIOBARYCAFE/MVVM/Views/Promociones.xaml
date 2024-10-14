@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ELIMPERIOBARYCAFE.Promociones"
+             BackgroundColor="white">
+
+    <!-- Habilitar ScrollView para permitir desplazamiento en la interfaz -->
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10" VerticalOptions="FillAndExpand">
+
+            <!-- Encabezado de la Sección de Promociones -->
+            <Label Text="Gestión de Promociones"
+                   FontAttributes="Bold"
+                   FontSize="24"
+                   TextColor="Black"
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,20"/>
+
+            <!-- Botón para Agregar Nueva Promoción -->
+            <Button Text="Agregar Nueva Promoción"
+                    BackgroundColor="Green"
+                    TextColor="White"
+                    Margin="0,0,0,20"
+                    HeightRequest="40"
+                    CornerRadius="20"
+                    Command="{Binding AgregarPromocionCommand}"/>
+
+            <!-- Lista de Promociones Actuales -->
+            <Label Text="Promociones Actuales:"
+                   FontAttributes="Bold"
+                   FontSize="18"
+                   TextColor="Black"
+                   Margin="0,0,0,5"/>
+            <CollectionView x:Name="ListaPromociones"
+                            HeightRequest="300"
+                            Margin="0,0,0,10"
+                            SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="LightGray" CornerRadius="10" Padding="10" Margin="0,5">
+                            <VerticalStackLayout>
+                                <!-- Detalles de la Promoción -->
+                                <HorizontalStackLayout Margin="0,0,0,5">
+                                    <Label Text="{Binding NombrePromocion}"
+                                           FontAttributes="Bold"
+                                           FontSize="16"
+                                           TextColor="Black"/>
+                                    <Label Text=" - "
+                                           FontSize="16"
+                                           TextColor="Black"/>
+                                    <Label Text="{Binding Descuento}"
+                                           FontSize="16"
+                                           TextColor="DarkGreen"/>
+                                </HorizontalStackLayout>
+                                <Label Text="{Binding Descripcion}"
+                                       FontSize="14"
+                                       TextColor="Black"
+                                       Margin="0,0,0,5"/>
+
+                                <!-- Botones para Editar o Eliminar la Promoción -->
+                                <HorizontalStackLayout HorizontalOptions="End">
+                                    <Button Text="Editar"
+                                            Margin="5,0,0,0"
+                                            BackgroundColor="Blue"
+                                            TextColor="White"
+                                            HeightRequest="35"
+                                            CornerRadius="20"
+                                            Command="{Binding EditarPromocionCommand}"/>
+                                    <Button Text="Eliminar"
+                                            Margin="5,0,0,0"
+                                            BackgroundColor="Red"
+                                            TextColor="White"
+                                            HeightRequest="35"
+                                            CornerRadius="20"
+                                            Command="{Binding EliminarPromocionCommand}"/>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Detalles de la Promoción Seleccionada para Editar o Agregar Nueva -->
+            <VerticalStackLayout x:Name="DetallePromocionLayout" IsVisible="False" Spacing="10">
+                <Label Text="Detalles de la Promoción:"
+                       FontAttributes="Bold"
+                       FontSize="18"
+                       TextColor="Black"
+                       Margin="0,0,0,5"/>
+
+                <Entry x:Name="NombrePromocionEntry"
+                       Placeholder="Nombre de la Promoción"
+                       Margin="0,0,0,10"
+                       BackgroundColor="LightGray"
+                       TextColor="Black"/>
+
+                <Entry x:Name="DescripcionPromocionEntry"
+                       Placeholder="Descripción de la Promoción"
+                       Margin="0,0,0,10"
+                       BackgroundColor="LightGray"
+                       TextColor="Black"/>
+
+                <Entry x:Name="DescuentoPromocionEntry"
+                       Placeholder="Descuento (%)"
+                       Keyboard="Numeric"
+                       Margin="0,0,0,10"
+                       BackgroundColor="LightGray"
+                       TextColor="Black"/>
+
+                <!-- Botón para Guardar Cambios o Agregar Nueva Promoción -->
+                <Button Text="Guardar"
+                        BackgroundColor="Green"
+                        TextColor="White"
+                        Margin="0,0,0,10"
+                        HeightRequest="40"
+                        CornerRadius="20"
+                        Command="{Binding GuardarPromocionCommand}"/>
+
+                <!-- Botón para Cancelar la Edición o Creación -->
+                <Button Text="Cancelar"
+                        BackgroundColor="Gray"
+                        TextColor="White"
+                        Margin="0,0,0,10"
+                        HeightRequest="40"
+                        CornerRadius="20"
+                        Command="{Binding CancelarPromocionCommand}"/>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

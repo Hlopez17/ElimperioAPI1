@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ELIMPERIOBARYCAFE.Login"
+             Title="Login">
+
+    <!-- Definir recursos globales aquí -->
+    <ContentPage.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#D3D3D3" Offset="0.0" />
+                        <GradientStop Color="Black" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid>
+            <!-- Contenedor de formulario -->
+            <Frame BackgroundColor="White"
+             CornerRadius="15"
+             Padding="20"
+             Margin="30"
+             VerticalOptions="Center"
+             HorizontalOptions="Center">
+                <StackLayout Spacing="20">
+                    <!-- Frame para el logo en un círculo -->
+                    <Frame Grid.Row="0"
+                           HeightRequest="120"
+                           WidthRequest="120"
+                           CornerRadius="60" 
+                           BorderColor="Black"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Start"
+                           Padding="0"
+                           Margin="0, 10">
+                        <!-- Margen superior para separar del borde -->
+                        <Image Source="logo_bar.png"
+                               Aspect="AspectFit" 
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </Frame>
+
+                    <!-- Campos de entrada de usuario -->
+                    <Entry Placeholder="Usuario" 
+                 PlaceholderColor="Gray" 
+                 TextColor="Black"
+                 FontSize="12"
+                 HeightRequest="40" 
+                 BackgroundColor="Transparent" />
+
+                    <Entry Placeholder="Contraseña" 
+                 PlaceholderColor="Gray" 
+                 TextColor="Black"
+                 FontSize="12"
+                 IsPassword="True"
+                 HeightRequest="40" 
+                 BackgroundColor="Transparent" />
+
+                    <!-- Botón de inicio de sesión -->
+                    <Button Text="Iniciar sesión"
+                  FontSize="13"
+                  BackgroundColor="Black"
+                  TextColor="White"
+                  CornerRadius="20"
+                  HeightRequest="40"
+                  HorizontalOptions="FillAndExpand" />
+
+                    <!-- Enlace de restablecimiento de contraseña -->
+                    <Label Text="¿Olvidaste tu contraseña?"
+                           TextColor="Gray"
+                           FontSize="12"
+                           HorizontalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                Tapped="OnForgotPasswordTapped"
+                                NumberOfTapsRequired="1" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <!-- Enlace de registro -->
+                    <Label Text="¿No tienes una cuenta? Regístrate"
+                           TextColor="Gray"
+                           FontSize="12"
+                           HorizontalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                Tapped="OnSignUpTapped"
+                                NumberOfTapsRequired="1" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

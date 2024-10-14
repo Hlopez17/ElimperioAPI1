@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ELIMPERIOBARYCAFE.PresentacionInicio"
+             Title="PresentacionInicio">
+    <Grid>
+        <!-- Fondo degradado -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#D3D3D3" Offset="0.0" />
+                <GradientStop Color="Black" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <!-- Contenido principal -->
+        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+            <!-- Frame para el logo en un círculo -->
+            <Frame Grid.Row="0"
+               HeightRequest="120"
+               WidthRequest="120"
+               CornerRadius="60" 
+               BorderColor="Black"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"
+               Padding="0"
+               Margin="0, 20">
+                <!-- Margen superior para separar del borde -->
+                <Image Source="logo_bar.png"
+                   Aspect="AspectFit"
+                HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+            </Frame>
+
+            <!-- Título -->
+            <Label Text="EL IMPERIO"
+                   FontSize="25"
+                   TextColor="White" 
+                FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+                <!-- Descripción -->
+                <Label Text="Bienvenido a nuestra aplicación, descubre todas nuestras funcionalidades."
+                   FontSize="13"
+                   TextColor="White" 
+                    HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   Margin="10,20,10,0" />
+
+                    <!-- Botón de Inicio -->
+                    <Button Text="COMENZAR"
+                    FontSize="14"
+                    BackgroundColor="White"
+                    TextColor="#373B44" 
+                        CornerRadius="20"
+                    HorizontalOptions="Center"
+                    Margin="0,30,0,0" 
+                    Clicked="OnComenzarClicked"/>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

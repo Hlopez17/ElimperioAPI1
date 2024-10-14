@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ELIMPERIOBARYCAFE.Descuentos"
+             BackgroundColor="white">
+
+    <!-- Habilitar ScrollView para permitir desplazamiento -->
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10" VerticalOptions="FillAndExpand">
+
+            <!-- Encabezado de la Sección de Descuentos -->
+            <Label Text="Gestión de Descuentos"
+                   FontAttributes="Bold"
+                   FontSize="24"
+                   TextColor="Black"
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,20"/>
+
+            <!-- Botón para Agregar Nuevo Descuento -->
+            <Button Text="Agregar Nuevo Descuento"
+                    BackgroundColor="Black"
+                    TextColor="White"
+                    HeightRequest="35"
+                    CornerRadius="20"
+                    Command="{Binding AgregarDescuentoCommand}"/>
+
+            <!-- Lista de Descuentos Actuales -->
+            <Label Text="Descuentos Actuales:"
+                   FontAttributes="Bold"
+                   FontSize="18"
+                   TextColor="Black"
+                   Margin="0,0,0,5"/>
+            <CollectionView x:Name="ListaDescuentos"
+                            HeightRequest="300"
+                            Margin="0,0,0,10"
+                            SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="LightGray" CornerRadius="10" Padding="10" Margin="0,5">
+                            <VerticalStackLayout>
+                                <!-- Detalles del Descuento -->
+                                <HorizontalStackLayout Margin="0,0,0,5">
+                                    <Label Text="{Binding NombreDescuento}"
+                                           FontAttributes="Bold"
+                                           FontSize="16"
+                                           TextColor="Black"/>
+                                    <Label Text=" - " FontSize="16" TextColor="Black"/>
+                                    <Label Text="{Binding Porcentaje}"
+                                           FontSize="16"
+                                           TextColor="DarkGreen"/>
+                                </HorizontalStackLayout>
+                                <Label Text="{Binding Descripcion}"
+                                       FontSize="14"
+                                       TextColor="Black"
+                                       Margin="0,0,0,5"/>
+
+                                <!-- Botones para Editar o Eliminar el Descuento -->
+                                <HorizontalStackLayout HorizontalOptions="End">
+                                    <Button Text="Editar"
+                                            Margin="5,0,0,0"
+                                            BackgroundColor="Black"
+                                            TextColor="White"
+                                            CornerRadius="20"
+                                            HeightRequest="35"
+                                            Command="{Binding EditarDescuentoCommand}"/>
+                                    <Button Text="Eliminar"
+                                            Margin="5,0,0,0"
+                                            BackgroundColor="Black"
+                                            TextColor="White"
+                                            CornerRadius="20"
+                                            HeightRequest="35"
+                                            Command="{Binding EliminarDescuentoCommand}"/>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Detalles del Descuento Seleccionado para Editar o Agregar Nuevo -->
+            <VerticalStackLayout x:Name="DetalleDescuentoLayout" IsVisible="False" Spacing="10">
+                <Label Text="Detalles del Descuento:"
+                       FontAttributes="Bold"
+                       FontSize="18"
+                       TextColor="Black"
+                       Margin="0,0,0,5"/>
+
+                <Entry x:Name="NombreDescuentoEntry"
+                       Placeholder="Nombre del Descuento"
+                       FontSize="14"
+                       BackgroundColor="LightGray"
+                       TextColor="Black"
+                       HeightRequest="40"/>
+
+                <Entry x:Name="DescripcionDescuentoEntry"
+                       Placeholder="Descripción del Descuento"
+                       FontSize="14"
+                       BackgroundColor="LightGray"
+                       TextColor="Black"
+                       HeightRequest="40"/>
+
+                <Entry x:Name="PorcentajeDescuentoEntry"
+                       Placeholder="Porcentaje de Descuento (%)"
+                       Keyboard="Numeric"
+                       FontSize="14"
+                       BackgroundColor="LightGray"
+                       TextColor="Black"
+                       HeightRequest="40"/>
+
+                <!-- Botón para Guardar Cambios o Agregar Nuevo Descuento -->
+                <Button Text="Guardar"
+                        BackgroundColor="Black"
+                        TextColor="White"
+                        HeightRequest="35"
+                        CornerRadius="20"
+                        Command="{Binding GuardarDescuentoCommand}"/>
+
+                <!-- Botón para Cancelar la Edición o Creación -->
+                <Button Text="Cancelar"
+                        BackgroundColor="Gray"
+                        TextColor="White"
+                        HeightRequest="35"
+                        CornerRadius="20"
+                        Command="{Binding CancelarDescuentoCommand}"/>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

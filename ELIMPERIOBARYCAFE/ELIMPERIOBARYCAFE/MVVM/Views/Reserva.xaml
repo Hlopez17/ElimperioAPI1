@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ELIMPERIOBARYCAFE.Reserva"
+             BackgroundColor="White">
+
+    <!-- ScrollView para permitir el desplazamiento -->
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10" VerticalOptions="FillAndExpand">
+
+            <!-- Encabezado de la Sección de Reserva -->
+            <Label Text="Reserva de Mesa"
+                   FontAttributes="Bold"
+                   FontSize="24"
+                   TextColor="Black"
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,20"/>
+
+            <!-- Selección de Fecha de Reserva -->
+            <Label Text="Fecha de Reserva:"
+                   FontAttributes="Bold"
+                   FontSize="18"
+                   TextColor="Black"
+                   Margin="0,0,0,5"/>
+            <DatePicker x:Name="FechaReservaPicker"
+                        Format="D"
+                        Margin="0,0,0,10"/>
+
+            <!-- Selección de Hora de Reserva -->
+            <Label Text="Hora de Reserva:"
+                   FontAttributes="Bold"
+                   FontSize="18"
+                   TextColor="Black"
+                   Margin="0,0,0,5"/>
+            <TimePicker x:Name="HoraReservaPicker"
+                        Format="t"
+                        Margin="0,0,0,10"/>
+
+            <!-- Selección de Número de Personas -->
+            <Label Text="Número de Personas:"
+                   FontAttributes="Bold"
+                   FontSize="18"
+                   TextColor="Black"
+                   Margin="0,0,0,5"/>
+            <Entry x:Name="NumeroPersonasEntry"
+                   Placeholder="Ingrese cantidad de personas"
+                   Keyboard="Numeric"
+                   BackgroundColor="LightGray"
+                   TextColor="Black"
+                   Margin="0,0,0,10"
+                   HeightRequest="40"/>
+
+            <!-- Selección de Mesa -->
+            <Label Text="Seleccione Mesa:"
+                   FontAttributes="Bold"
+                   FontSize="18"
+                   TextColor="Black"
+                   Margin="0,0,0,5"/>
+            <Picker x:Name="MesaPicker"
+                    Title="Seleccione Mesa"
+                    Margin="0,0,0,10"
+                    HeightRequest="60">
+                <!-- Definir las mesas disponibles -->
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Mesa 1</x:String>
+                        <x:String>Mesa 2</x:String>
+                        <x:String>Mesa 3</x:String>
+                        <x:String>Mesa 4</x:String>
+                        <!-- Agregar más mesas según sea necesario -->
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <!-- Botón para Confirmar Reserva -->
+            <Button Text="Confirmar Reserva"
+                    BackgroundColor="Green"
+                    TextColor="White"
+                    Margin="0,0,0,20"
+                    HeightRequest="40"
+                    CornerRadius="20"
+                    Command="{Binding ConfirmarReservaCommand}"/>
+
+            <!-- Resumen de la Reserva -->
+            <Label Text="Resumen de Reserva:"
+                   FontAttributes="Bold"
+                   FontSize="18"
+                   TextColor="Black"
+                   Margin="0,0,0,5"/>
+            <VerticalStackLayout x:Name="ResumenReservaLayout" IsVisible="False" Padding="10" BackgroundColor="LightGray">
+                <Label Text="{Binding ResumenFecha}"
+                       FontSize="14"
+                       TextColor="Black"/>
+                <Label Text="{Binding ResumenHora}"
+                       FontSize="14"
+                       TextColor="Black"/>
+                <Label Text="{Binding ResumenMesa}"
+                       FontSize="14"
+                       TextColor="Black"/>
+                <Label Text="{Binding ResumenPersonas}"
+                       FontSize="14"
+                       TextColor="Black"/>
+            </VerticalStackLayout>
+
+            <!-- Botón para Cancelar la Reserva -->
+            <Button Text="Cancelar Reserva"
+                    BackgroundColor="Red"
+                    TextColor="White"
+                    Margin="0,0,0,10"
+                    HeightRequest="40"
+                    CornerRadius="20"
+                    Command="{Binding CancelarReservaCommand}"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,6 @@
+@ElimperioAPI_HostAddress = http://localhost:5103
+
+GET {{ElimperioAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
