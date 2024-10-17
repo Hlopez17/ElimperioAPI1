@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ELIMPERIOBARYCAFE.Login"
-             Title="Login">
-
+             x:Class="ELIMPERIOBARYCAFE.MVVM.View.Auth"
+             Title="Auth">
+    
     <!-- Definir recursos globales aquí -->
     <ContentPage.Resources>
         <Style TargetType="Grid">
@@ -46,14 +46,18 @@
                     </Frame>
 
                     <!-- Campos de entrada de usuario -->
-                    <Entry Placeholder="Usuario" 
+                    <Entry 
+                        Text="{Binding Username}"
+                        Placeholder="Usuario" 
                  PlaceholderColor="Gray" 
                  TextColor="Black"
                  FontSize="12"
                  HeightRequest="40" 
                  BackgroundColor="Transparent" />
 
-                    <Entry Placeholder="Contraseña" 
+                    <Entry 
+                        Text="{Binding Password}"
+                        Placeholder="Contraseña" 
                  PlaceholderColor="Gray" 
                  TextColor="Black"
                  FontSize="12"
@@ -97,4 +101,5 @@
             </Frame>
         </Grid>
     </ContentPage.Content>
+    
 </ContentPage>

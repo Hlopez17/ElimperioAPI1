@@ -2,12 +2,12 @@ namespace ELIMPERIOBARYCAFE;
 
 public partial class PresentacionInicio : ContentPage
 {
-	public PresentacionInicio()
+	public PresentacionInicio(string token)
 	{
 		InitializeComponent();
 	}
     private async void OnComenzarClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new Login());
+        await Navigation.PushAsync(new Caja());
     }
 }

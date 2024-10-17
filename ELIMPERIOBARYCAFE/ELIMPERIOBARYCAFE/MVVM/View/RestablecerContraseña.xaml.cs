@@ -1,3 +1,5 @@
+using ELIMPERIOBARYCAFE.MVVM.View;
+
 namespace ELIMPERIOBARYCAFE;
 
 public partial class RestablecerContraseña : ContentPage
@@ -8,6 +10,7 @@ public partial class RestablecerContraseña : ContentPage
 	}
     private async void OnLoginTapped(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new Login());
+        await Navigation.PushAsync(new Auth());
     }
+
 }
