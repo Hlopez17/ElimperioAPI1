@@ -9,8 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<ImperioDBsettings>(
 builder.Configuration.GetSection("ConfiguracionBaseDatos"));
 
-builder.Services.AddSingleton<ImperioDBsettings>();
+builder.Services.AddSingleton<ProductoService>();
 builder.Services.AddSingleton<UserService>();
+builder.Services.AddSingleton<ReservaServices>();
 
 builder.Services.AddControllers()
 .AddJsonOptions(

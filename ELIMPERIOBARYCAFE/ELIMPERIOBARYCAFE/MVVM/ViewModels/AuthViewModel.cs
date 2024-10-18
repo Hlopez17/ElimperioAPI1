@@ -36,7 +36,7 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
 
             //Crear comandos manualmente 
             RegisterCommand = new Command(async () => await RegisterAsync());
-            //LoginCommand = new Command(async () => await LoginAsync());
+            LoginCommand = new Command(async () => await LoginAsync());
         }
 
         [ObservableProperty]
@@ -94,7 +94,7 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
 
             try
             {
-                var response = await _httpClient.PostAsJsonAsync("http://localhost:5033/api/Auth/login", user);
+                var response = await _httpClient.PostAsJsonAsync("http://10.0.2.2:5002/api/Auth/login", user);
 
                 if (!response.IsSuccessStatusCode)
 

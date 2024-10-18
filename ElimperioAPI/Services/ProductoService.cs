@@ -15,7 +15,7 @@ namespace ElimperioAPI.Services
         {
             var clienteMongo = new MongoClient(configuracionBD.Value.CadenaConexion);
             var BaseDatos = clienteMongo.GetDatabase(configuracionBD.Value.NombreBaseDatos);
-            _coleccionProducto= BaseDatos.GetCollection<Producto>(configuracionBD.Value.ColeccionImperio);
+            _coleccionProducto= BaseDatos.GetCollection<Producto>("Productos");
         }
 
         public async Task<List<Producto>> ObtenerAsync()=> await _coleccionProducto.Find(_ =>true).ToListAsync();

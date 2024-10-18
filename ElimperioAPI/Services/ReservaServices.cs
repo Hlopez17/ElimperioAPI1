@@ -16,7 +16,7 @@ namespace ElimperioAPI.Services
         {
             var clienteMongo = new MongoClient(configuracionBD.Value.CadenaConexion);
             var BaseDatos = clienteMongo.GetDatabase(configuracionBD.Value.NombreBaseDatos);
-            _coleccionreservas = BaseDatos.GetCollection<Reservas>(configuracionBD.Value.ColeccionImperio);
+            _coleccionreservas = BaseDatos.GetCollection<Reservas>("Reservas");
         }
 
         public async Task<List<Reservas>> Get()
@@ -27,8 +27,8 @@ namespace ElimperioAPI.Services
             => await _coleccionreservas.FindAsync(
                 new BsonDocument { { "_id", new ObjectId(id) } }).Result.FirstAsync();
 
-        public async Task Create(Reservas product)
-            => await _coleccionreservas.InsertOneAsync(product);
+        public async Task Create(Reservas reserva)
+            => await _coleccionreservas.InsertOneAsync(reserva);
 
         public async Task Update(Reservas product)
         {

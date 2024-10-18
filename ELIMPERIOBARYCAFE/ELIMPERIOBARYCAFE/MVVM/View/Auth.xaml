@@ -72,18 +72,19 @@
                   TextColor="White"
                   CornerRadius="20"
                   HeightRequest="40"
-                  HorizontalOptions="FillAndExpand" />
+                  HorizontalOptions="FillAndExpand" 
+                  Command="{Binding LoginCommand}"/>
 
                     <!-- Enlace de restablecimiento de contraseña -->
                     <Label Text="¿Olvidaste tu contraseña?"
                            TextColor="Gray"
                            FontSize="12"
                            HorizontalOptions="Center">
-                        <Label.GestureRecognizers>
+                        <!--<Label.GestureRecognizers>
                             <TapGestureRecognizer 
                                 Tapped="OnForgotPasswordTapped"
                                 NumberOfTapsRequired="1" />
-                        </Label.GestureRecognizers>
+                        </Label.GestureRecognizers>-->
                     </Label>
 
                     <!-- Enlace de registro -->
@@ -92,11 +93,13 @@
                            FontSize="12"
                            HorizontalOptions="Center">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer 
+                            <!--<TapGestureRecognizer 
                                 Tapped="OnSignUpTapped"
-                                NumberOfTapsRequired="1" />
+                                NumberOfTapsRequired="1" />-->
                         </Label.GestureRecognizers>
                     </Label>
+                  
+                    
                 </StackLayout>
             </Frame>
         </Grid>

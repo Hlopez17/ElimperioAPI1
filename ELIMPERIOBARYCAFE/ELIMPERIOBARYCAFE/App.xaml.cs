@@ -1,4 +1,6 @@
-﻿namespace ELIMPERIOBARYCAFE
+﻿using ELIMPERIOBARYCAFE.MVVM.View;
+
+namespace ELIMPERIOBARYCAFE
 {
     public partial class App : Application
     {
@@ -6,7 +8,7 @@
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new Reserva());
+            MainPage = new NavigationPage(new NewPage1());
         }
     }
 }

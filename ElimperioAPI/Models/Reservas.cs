@@ -15,7 +15,7 @@ namespace ElimperioAPI.Models
         [BsonElement("CantPersonas")]
         public int CantPersonas { get; set; }
         [BsonElement("Mesa")]
-        public string Mesa { get; set; } = null!;
+        public string Mesa { get; set; } 
 
      
     }

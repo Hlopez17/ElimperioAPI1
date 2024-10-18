@@ -16,7 +16,7 @@ namespace ElimperioAPI.Controllers
         private readonly ProductoService _Productoservicios;
 
         public ProductoController(ProductoService productoServicio)=> _Productoservicios = productoServicio;
-        [Authorize]
+       
         [HttpGet]
 
         public async Task<List<Producto>> Obtener() => await _Productoservicios.ObtenerAsync();

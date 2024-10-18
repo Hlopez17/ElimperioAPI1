@@ -33,16 +33,16 @@ namespace ElimperioAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Reservas product)
+        public async Task<IActionResult> Create([FromBody] Reservas reserva)
         {
-            if (product == null)
-                return BadRequest();
+            //if (reserva == null)
+            //    return BadRequest();
 
             //// podria tener mas validaciones
             //if (product.Name == string.Empty || product.Price < 0)
             //    ModelState.AddModelError("Error al crear producto", "Agregue un nombre valido y un precio correcto");
 
-            await _reservaService.Create(product);
+            await _reservaService.Create(reserva);
 
             return Created("Created", true);
         }
