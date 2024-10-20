@@ -27,8 +27,10 @@ namespace ElimperioAPI.Services
             => await _coleccionreservas.FindAsync(
                 new BsonDocument { { "_id", new ObjectId(id) } }).Result.FirstAsync();
 
-        public async Task Create(Reservas reserva)
-            => await _coleccionreservas.InsertOneAsync(reserva);
+        public async Task InsertarReservaAsync(Reservas reserva)
+        {
+            await _coleccionreservas.InsertOneAsync(reserva);
+        }
 
         public async Task Update(Reservas product)
         {

@@ -22,6 +22,7 @@ namespace ElimperioAPI.Services
            => await _coleccionUsuarios.Find(u => u.Username == username).FirstOrDefaultAsync();
 
         public async Task CrearUsuarioAsync(User nuevoUsuario)
+
             => await _coleccionUsuarios.InsertOneAsync(nuevoUsuario);
 
         public async Task<List<User>> Get()

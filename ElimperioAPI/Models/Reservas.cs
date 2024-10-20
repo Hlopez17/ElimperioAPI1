@@ -6,7 +6,8 @@ namespace ElimperioAPI.Models
     public class Reservas
     {
         [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]  public ObjectId Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]  
+        public ObjectId Id { get; set; }
        
         [BsonElement("Fecha")]
         public DateOnly Fecha { get; set; }

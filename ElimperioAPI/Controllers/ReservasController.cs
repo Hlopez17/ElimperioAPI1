@@ -29,23 +29,27 @@ namespace ElimperioAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
-            return Ok(await _reservaService.GetById(id));
+            var reserva = await _reservaService.GetById(id);
+            if (reserva == null)
+                return NotFound("Reserva no encontrada.");
+            return Ok(reserva);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create( Reservas reserva)
+        public async Task<IActionResult> CrearReserva([FromBody] Reservas reserva)
         {
-            //if (reserva == null)
-            //    return BadRequest();
-
-            //// podria tener mas validaciones
-            //if (product.Name == string.Empty || product.Price < 0)
-            //    ModelState.AddModelError("Error al crear producto", "Agregue un nombre valido y un precio correcto");
-
-            await _reservaService.Create(reserva);
-
-            return Created("Created", true);
+            try
+            {
+                await _reservaService.InsertarReservaAsync(reserva);
+                return Ok(new { mensaje = "Reserva creada exitosamente." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error al crear la reserva: {ex.Message}");
+            }
         }
+
+
 
         [HttpPut("{id}")]
 
@@ -58,9 +62,16 @@ namespace ElimperioAPI.Controllers
             //if (reserv.Name == string.Empty || reserv.Price < 0)
             //    ModelState.AddModelError("Error al actualizar producto", "Agregue un nombre valido y un precio correcto");
 
-          reserv.Id = new MongoDB.Bson.ObjectId(id);
+            reserv.Id = new MongoDB.Bson.ObjectId(id);
             await _reservaService.Update(reserv);
             return Created("Updated", true);
         }
+
+        //public async Task Update(Reservas reserv)
+        //{
+        //    var filter = Builders<Reservas>.Filter.Eq(r => r.Id, reserv.Id);
+        //    await _reservaService.ReplaceOneAsync(filter, reserv);
+        //}
+
     }
 }

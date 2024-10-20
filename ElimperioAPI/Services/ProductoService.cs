@@ -29,7 +29,6 @@ namespace ElimperioAPI.Services
 
             //    calificacion.Id = ObjectId.GenerateNewId().ToString();
             //}
-
             await _coleccionProducto.InsertOneAsync(nuevoProducto);
         }
 
