@@ -33,7 +33,7 @@ namespace ElimperioAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Reservas reserva)
+        public async Task<IActionResult> Create( Reservas reserva)
         {
             //if (reserva == null)
             //    return BadRequest();
