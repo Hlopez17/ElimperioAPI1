@@ -16,6 +16,9 @@ namespace ElimperioAPI.Models
         public string OrdenID { get; set; } = null!;
         public List<Producto> Pedido { get; set; } = new List<Producto>();
 
+        [BsonElement("Estado")]
+        public string Estado { get; set;} = string.Empty;
+
         
 
 

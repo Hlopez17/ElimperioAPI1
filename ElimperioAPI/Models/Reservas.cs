@@ -10,9 +10,9 @@ namespace ElimperioAPI.Models
         public ObjectId Id { get; set; }
        
         [BsonElement("Fecha")]
-        public DateOnly Fecha { get; set; }
+        public string Fecha { get; set; }
         [BsonElement("Hora")]
-        public TimeOnly Hora { get; set; }
+        public string Hora { get; set; }
         [BsonElement("CantPersonas")]
         public int CantPersonas { get; set; }
         [BsonElement("Mesa")]

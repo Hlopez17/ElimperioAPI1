@@ -12,9 +12,13 @@ namespace ElimperioAPI.Models
 
         [BsonElement("Mesa")]
         public string Mesa { get; set; } = null!;
+        [BsonElement("Tipo de Pago")] public string Tipopago { get; set; }
 
         [BsonElement("Total")]
         public int Total { get; set; }
+
+        [BsonElement("Fecha")]
+        public DateTime Fecha { get; set; }
 
     }
 }
