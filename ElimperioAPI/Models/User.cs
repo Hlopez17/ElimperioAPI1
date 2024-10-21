@@ -11,7 +11,7 @@ namespace ElimperioAPI.Models
         public string? Id { get; set; }
 
         [BsonElement("Nombre_Completo")]
-        public string Nombre_Completo { get; set; } = null!;
+        public string? Nombre_Completo { get; set; } = null!;
 
         [BsonElement("Username")]
         public string Username { get; set; } = string.Empty;
@@ -20,10 +20,9 @@ namespace ElimperioAPI.Models
         public string Contraseña { get; set; } = string.Empty;
 
         [BsonElement("Role")]
-        public string Rol { get; set; } = null!;
-
+        public string? Rol { get; set; }
         [BsonElement("Email")]
-        public string Email { get; set; } = null!;
+        public string? Email { get; set; }
 
     }
 }

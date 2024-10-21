@@ -28,5 +28,14 @@ namespace ElimperioAPI.Services
         public async Task<List<User>> Get()
            => await _coleccionUsuarios.FindAsync(
                new BsonDocument()).Result.ToListAsync();
+
+        // Validación de usuario y contraseña
+        public async Task<User?> LoginAsync(string username, string password)
+        {
+            var filter = Builders<User>.Filter.Eq(u => u.Username, username) &
+                         Builders<User>.Filter.Eq(u => u.Contraseña, password);
+
+            return await _coleccionUsuarios.Find(filter).FirstOrDefaultAsync();
+        }
     }
 }
