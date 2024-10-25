@@ -12,7 +12,7 @@ namespace ELIMPERIOBARYCAFE.MVVM.Models
         public string? Id { get; set; }
         public string Nombre_Completo { get; set; } = null!;
         public string Username { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
+        public string Contraseña { get; set; } = string.Empty;
         public string Rol { get; set; } = null!;
 
         [EmailAddress(ErrorMessage = "Formato de email no válido.")]

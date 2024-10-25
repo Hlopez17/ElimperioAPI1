@@ -11,12 +11,14 @@ namespace ElimperioAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductoController:ControllerBase
     {
         private readonly ProductoService _Productoservicios;
 
         public ProductoController(ProductoService productoServicio)=> _Productoservicios = productoServicio;
-       
+
+        
         [HttpGet]
 
         public async Task<List<Producto>> Obtener() => await _Productoservicios.ObtenerAsync();
@@ -29,7 +31,6 @@ namespace ElimperioAPI.Controllers
             return estudiante;
         }
 
-       
         [HttpPost]
         public async Task<IActionResult> Crear(Producto nuevoProducto)
         {
@@ -37,7 +38,7 @@ namespace ElimperioAPI.Controllers
             return CreatedAtAction(nameof(Obtener), new { id = nuevoProducto.Id }, nuevoProducto);
         }
 
-     
+        
         [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> Actualizar(string id, Producto productoActualizado)
         {

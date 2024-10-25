@@ -1,5 +1,7 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes; 
+﻿using Microsoft.VisualBasic;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
 
 namespace ElimperioAPI.Models
 {
@@ -10,7 +12,7 @@ namespace ElimperioAPI.Models
         public ObjectId Id { get; set; }
        
         [BsonElement("Fecha")]
-        public string Fecha { get; set; }
+        public string Fecha  { get; set; }
         [BsonElement("Hora")]
         public string Hora { get; set; }
         [BsonElement("CantPersonas")]

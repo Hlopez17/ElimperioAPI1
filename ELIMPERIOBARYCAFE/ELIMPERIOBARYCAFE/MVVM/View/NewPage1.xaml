@@ -4,7 +4,7 @@
              x:Class="ELIMPERIOBARYCAFE.MVVM.View.NewPage1"
              Title="NewPage1">
     <VerticalStackLayout>
-        <WebView Source="http://localhost:5002/api/Producto"/>
+        <WebView Source="http://10.0.2.2:5103/api/Reservas"/>
 
     </VerticalStackLayout>
 </ContentPage>

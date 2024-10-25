@@ -25,7 +25,7 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
         private readonly HttpClient _httpClient;
         private readonly Page _page; // Referencia  a la página
 
-        //Prpirdades para el binding de comandos
+        //Propiedades para el binding de comandos
         public ICommand RegisterCommand { get; }
         public ICommand LoginCommand { get; }
         
@@ -43,7 +43,7 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
         private string username;
 
         [ObservableProperty] 
-        private string password;
+        private string contraseña;
         [ObservableProperty]
         private string nombre;
         [ObservableProperty]
@@ -58,7 +58,7 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
             {
                 Nombre_Completo = nombre,
                 Username = username,
-                Password = password,
+                Contraseña = contraseña,
                 Email = email,
                 Rol = rol
 
@@ -89,14 +89,14 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
             var user = new User
             {
                 Username = username,
-                Password = password,
+                Contraseña = contraseña
             };
 
             try
             {
                 var response = await _httpClient.PostAsJsonAsync("http://10.0.2.2:5002/api/Auth/login", user);
 
-                if (!response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
 
                 {
                     // Obtener el token de la respuesta

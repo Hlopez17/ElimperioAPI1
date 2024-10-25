@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ELIMPERIOBARYCAFE.MVVM.View.RegistroProveedores"
+             Title="RegistroProveedores">
+    <!-- ScrollView para permitir el desplazamiento -->
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10" VerticalOptions="FillAndExpand">
+
+            <!-- Frame para el logo -->
+            <Frame Grid.Row="0"
+                   HeightRequest="120"
+                   WidthRequest="120"
+                   CornerRadius="60" 
+                   BorderColor="Black"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Start"
+                   Padding="0"
+                   Margin="0, 10">
+                <Image Source="logo_bar.png"
+                       Aspect="AspectFit" 
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+            </Frame>
+
+            <!-- Campo para el nombre del proveedor -->
+            <Entry Placeholder="Nombre del proveedor"
+                   PlaceholderColor="Gray" 
+                   TextColor="Black"
+                   FontSize="12"
+                   HeightRequest="10"
+                   BackgroundColor="Transparent"
+                   HorizontalOptions="FillAndExpand"/>
+
+            <!-- Campo para el producto proporcionado -->
+            <Entry Placeholder="Producto proporcionado"
+                   PlaceholderColor="Gray"
+                   TextColor="Black"
+                   FontSize="12"
+                   HeightRequest="10"
+                   BackgroundColor="Transparent"
+                   HorizontalOptions="FillAndExpand"/>
+
+            <!-- Campo para el contacto del proveedor -->
+            <Entry Placeholder="Contacto del proveedor"
+                   PlaceholderColor="Gray"
+                   TextColor="Black"
+                   FontSize="12"
+                   HeightRequest="10"
+                   BackgroundColor="Transparent"
+                   HorizontalOptions="FillAndExpand"/>
+
+            <!-- Campo para la dirección del proveedor -->
+            <Entry Placeholder="Dirección del proveedor"
+                   PlaceholderColor="Gray"
+                   TextColor="Black"
+                   FontSize="12"
+                   HeightRequest="10"
+                   BackgroundColor="Transparent"
+                   HorizontalOptions="FillAndExpand"/>
+
+
+            <!-- Campo para la frecuencia de entrega -->
+            <Entry Placeholder="Frecuencia de entrega (semanal, quincenal, mensual)"
+                   PlaceholderColor="Gray"
+                   TextColor="Black"
+                   FontSize="12"
+                   HeightRequest="10"
+                   BackgroundColor="Transparent"
+                   HorizontalOptions="FillAndExpand"/>
+
+            <!-- Botón para registrar proveedor -->
+            <Button Text="Registrar Proveedor"
+                    FontSize="13"
+                    BackgroundColor="Black"
+                    TextColor="White"
+                    CornerRadius="20"
+                    HeightRequest="35"
+                    HorizontalOptions="FillAndExpand"/>
+
+            <!-- Tabla para mostrar los proveedores actuales -->
+            <Label Text="Proveedores Actuales:" FontAttributes="Bold"/>
+            <CollectionView x:Name="proveedoresActuales" 
+                            HeightRequest="100">
+                <!-- Plantilla para mostrar los proveedores actuales -->
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Label Text="{Binding NombreProveedor}" 
+                                   TextColor="Black"/>
+                            <Label Text="{Binding Producto}" 
+                                   TextColor="Gray"/>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Botón para finalizar -->
+            <Button Text="Finalizar"
+                    FontSize="13"
+                    BackgroundColor="Black"
+                    TextColor="White"
+                    CornerRadius="20"
+                    HeightRequest="35"
+                    HorizontalOptions="FillAndExpand"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

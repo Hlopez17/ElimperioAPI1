@@ -56,7 +56,7 @@
                  BackgroundColor="Transparent" />
 
                     <Entry 
-                        Text="{Binding Password}"
+                        Text="{Binding Contraseña}"
                         Placeholder="Contraseña" 
                  PlaceholderColor="Gray" 
                  TextColor="Black"
