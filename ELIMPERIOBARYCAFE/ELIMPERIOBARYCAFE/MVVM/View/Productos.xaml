@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ELIMPERIOBARYCAFE.MVVM.View.Productos"
+             Title="Productos">
+
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10" VerticalOptions="FillAndExpand">
+
+            <!-- Frame para el logo -->
+            <Frame HeightRequest="120"
+                   WidthRequest="120"
+                   CornerRadius="60" 
+                   BorderColor="Black"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Start"
+                   Padding="0"
+                   Margin="0, 10">
+                <Image Source="logo_bar.png"
+                       Aspect="AspectFit" 
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+            </Frame>
+
+            <!-- Campo para el nombre del producto -->
+            <Entry Placeholder="Nombre del producto"
+                   PlaceholderColor="Gray" 
+                   TextColor="Black"
+                   FontSize="12"
+                   HeightRequest="40"
+                   BackgroundColor="Transparent"
+                   HorizontalOptions="FillAndExpand"/>
+
+            <!-- Selector de categoría -->
+            <Picker Title="Categoría" TitleColor="Gray" TextColor="Black">
+                <Picker.Items>
+                    <x:String>Alimentos</x:String>
+                    <x:String>Bebidas</x:String>
+                    <x:String>Otros</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <!-- Campo para el precio del producto -->
+            <Entry Placeholder="Precio del producto"
+                   PlaceholderColor="Gray"
+                   TextColor="Black"
+                   FontSize="12"
+                   HeightRequest="40"
+                   Keyboard="Numeric"
+                   BackgroundColor="Transparent"
+                   HorizontalOptions="FillAndExpand"/>
+
+            <!-- Campo para el stock disponible -->
+            <Entry Placeholder="Stock"
+                   PlaceholderColor="Gray"
+                   TextColor="Black"
+                   FontSize="12"
+                   HeightRequest="40"
+                   Keyboard="Numeric"
+                   BackgroundColor="Transparent"
+                   HorizontalOptions="FillAndExpand"/>
+            <!-- Tabla para mostrar los productos actuales -->
+            <Label Text="Productos Actuales:" FontAttributes="Bold" />
+            <CollectionView x:Name="productosActuales"
+                            HeightRequest="100">
+                <!-- Plantilla para mostrar los productos actuales -->
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Label Text="{Binding NombreProducto}" 
+                                   TextColor="Black"/>
+                            <Label Text="{Binding CategoriaProducto}" 
+                                   TextColor="Gray"/>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <!-- Botones de Guardar y Cancelar -->
+            <HorizontalStackLayout Spacing="10">
+                <Button Text="Registrar" FontSize="14" 
+                        BackgroundColor="Black" TextColor="White" HorizontalOptions="FillAndExpand"/>
+                <Button Text="Cancelar" FontSize="14" BackgroundColor="Black" TextColor="White" HorizontalOptions="FillAndExpand"/>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+
+</ContentPage>

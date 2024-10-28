@@ -117,6 +117,9 @@
 	  <MauiXaml Update="MVVM\View\PresentacionInicio.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="MVVM\View\Productos.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="MVVM\View\Promociones.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
