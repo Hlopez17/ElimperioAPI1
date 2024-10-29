@@ -8,7 +8,7 @@ namespace ELIMPERIOBARYCAFE
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new RegistroProveedores());
+            MainPage = new NavigationPage(new Auth());
         }
     }
 }

@@ -20,7 +20,8 @@ using ELIMPERIOBARYCAFE.MVVM.Models;
 
 namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
 {
-    internal class ProductViewModel
+    internal class ProductViewModel: ObservableObject
     {
+
     }
 }
