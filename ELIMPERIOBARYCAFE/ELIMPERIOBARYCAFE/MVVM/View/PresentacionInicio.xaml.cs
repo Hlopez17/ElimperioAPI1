@@ -1,3 +1,5 @@
+using ELIMPERIOBARYCAFE.MVVM.View;
+
 namespace ELIMPERIOBARYCAFE;
 
 public partial class PresentacionInicio : ContentPage
@@ -8,6 +10,6 @@ public partial class PresentacionInicio : ContentPage
 	}
     private async void OnComenzarClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new Caja());
+        await Navigation.PushAsync(new Menu());
     }
 }

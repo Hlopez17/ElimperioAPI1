@@ -66,7 +66,7 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
 
             try
             {
-                var response = await _httpClient.PostAsJsonAsync("http://localhost:5033/api/Auth/Register", user);
+                var response = await _httpClient.PostAsJsonAsync("http://localhost:5002/api/Auth/Register", user);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -128,7 +128,7 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
                 }
                 else
                 {
-                    await _page.DisplayAlert("Error", "Error en el login", "OK");
+                    await _page.DisplayAlert("Error", "Credenciales Incorrectas", "OK");
                 }
             
             }

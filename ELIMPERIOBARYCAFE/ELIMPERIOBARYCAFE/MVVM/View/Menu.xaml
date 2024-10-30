@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ELIMPERIOBARYCAFE.MVVM.View.Menu"
+             Title="Menu"
+             BackgroundColor="#F4F4F4">
+
+    
+    <ScrollView>
+        <Grid Padding="10"
+              RowSpacing="10"
+              ColumnSpacing="10"
+              BackgroundColor="#F4F4F4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+             <!--Tarjeta 1--> 
+            <Frame Grid.Row="0" Grid.Column="0"
+                   BackgroundColor="DarkGray"
+                   CornerRadius="15"
+                   Padding="10">
+                <VerticalStackLayout Spacing="5">
+                    <Image Source="medicina.png" WidthRequest="40" HeightRequest="40" />
+                    <Label Text="Usuarios"
+                           TextColor="White"
+                           FontSize="Medium"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Frame>
+
+             <!--Tarjeta 2--> 
+            <Frame Grid.Row="0" Grid.Column="1"
+                   BackgroundColor="DarkGray"
+                   CornerRadius="15"
+                   Padding="10">
+                <VerticalStackLayout Spacing="5">
+                    <Image Source="consulta.png" WidthRequest="40" HeightRequest="40" />
+                    <Label Text="Proveedores"
+                           TextColor="White"
+                           FontSize="Medium"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Frame>
+
+             <!--Tarjeta 3--> 
+            <Frame Grid.Row="2" Grid.Column="0"
+                   BackgroundColor="DarkGray"
+                   CornerRadius="15"
+                   Padding="10">
+                <VerticalStackLayout Spacing="5">
+                    <Image Source="hogar.png" WidthRequest="40" HeightRequest="40" />
+                    <!-- Botón de Inicio -->
+                    <Button Text="Ventas"
+                        FontSize="14"
+                        BackgroundColor="White"
+                        TextColor="#373B44" 
+                        CornerRadius="20"
+                        HorizontalOptions="Center"
+                        Margin="0,30,0,0" 
+                        Clicked="OnMeseroClicked"/>
+                </VerticalStackLayout>
+            </Frame>
+
+             <!--Tarjeta 4--> 
+            <Frame Grid.Row="2" Grid.Column="1"
+                   BackgroundColor="DarkGray"
+                   CornerRadius="15"
+                   Padding="10">
+                <VerticalStackLayout Spacing="5">
+                    <Image Source="llamada.png" WidthRequest="40" HeightRequest="40" />
+                    <Label Text="Llamada"
+                           TextColor="White"
+                           FontSize="Medium"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Frame>
+
+             <!--Tarjeta 5--> 
+            <Frame Grid.Row="4" Grid.Column="0"
+                   BackgroundColor="DarkGray"
+                   CornerRadius="15"
+                   Padding="10">
+                <VerticalStackLayout Spacing="5">
+                    <Image Source="info.png" WidthRequest="40" HeightRequest="40" />
+                    <Label Text="Información"
+                           TextColor="White"
+                           FontSize="Medium"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Frame>
+
+             <!--Tarjeta 6--> 
+            <Frame Grid.Row="4" Grid.Column="1"
+                   BackgroundColor="DarkGray"
+                   CornerRadius="15"
+                   Padding="10">
+                <VerticalStackLayout Spacing="5">
+                    <Image Source="dientes.png" WidthRequest="40" HeightRequest="40" />
+                    <Label Text="Dentista"
+                           TextColor="White"
+                           FontSize="Medium"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Frame>
+        </Grid>
+    </ScrollView>
+
+
+
+
+
+
+    <!--<Grid Padding="20">
+        --><!-- Definición de filas para el logo y los botones --><!--
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            --><!-- Fila para el logo --><!--
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        --><!-- Frame para el logo en un círculo --><!--
+        <Frame Grid.Row="0"
+            HeightRequest="120"
+            WidthRequest="120"
+            CornerRadius="60" 
+         BorderColor="#FFC107"
+    
+         BackgroundColor="White"
+            HorizontalOptions="Center"
+            VerticalOptions="Start"
+            Padding="0"
+            Margin="0, 20">
+            --><!-- Margen superior para separar del borde --><!--
+            <Image Source="logo_bar.png"
+                Aspect="AspectFit" 
+             HorizontalOptions="Center"
+                VerticalOptions="Center" />
+        </Frame>
+
+        --><!-- Botones -->
+        <!-- Botón "Cocina" con ícono --><!--
+        <Button Text="Cocina"
+             FontSize="20"
+             FontAttributes="Bold"
+             HorizontalOptions="FillAndExpand"
+             VerticalOptions="Center"
+             Grid.Row="1"
+             HeightRequest="80"
+             Margin="0,10"
+             BackgroundColor="#FFC107"
+             TextColor="#000000"
+             CornerRadius="10"
+             ImageSource="cocina_icon.png"
+             Clicked="OnCocinaClicked" />
+
+        --><!-- Botón "Mesero" con ícono --><!--
+        <Button Text="Mesero"
+             FontSize="20"
+             FontAttributes="Bold"
+             HorizontalOptions="FillAndExpand"
+             VerticalOptions="Center"
+             Grid.Row="2"
+             HeightRequest="80"
+             Margin="0,10"
+             BackgroundColor="Black"
+             TextColor="White"
+             CornerRadius="10"
+             ImageSource="mesero_icon.png"
+             Clicked="OnMeseroClicked" />
+
+        --><!-- Botón "Caja" con ícono --><!--
+        <Button Text="Caja"
+             FontSize="20"
+             FontAttributes="Bold"
+             HorizontalOptions="FillAndExpand"
+             VerticalOptions="Center"
+             Grid.Row="3"
+             HeightRequest="80"
+             Margin="0,10"
+             BackgroundColor="#FFC107"
+             TextColor="#000000"
+             CornerRadius="10"
+             ImageSource="caja_icon.png"
+             Clicked="OnCajaClicked" />
+    </Grid>-->
+</ContentPage>

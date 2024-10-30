@@ -62,6 +62,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="MVVM\View\Cocinas.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Resources\Images\bebida.png" />
 	  <None Remove="Resources\Images\calendar.png" />
 	  <None Remove="Resources\Images\carritodecompra.png" />
@@ -84,25 +88,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="MVVM\View\Cocina.xaml.cs">
-	    <DependentUpon>Cocina.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
 	  <MauiXaml Update="MVVM\View\Auth.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MVVM\View\Caja.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="MVVM\View\Cocina.xaml">
+	  <MauiXaml Update="MVVM\View\Cocinas.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MVVM\View\Descuentos.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MVVM\View\Eventos.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\View\Menu.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MVVM\View\Mesero.xaml">

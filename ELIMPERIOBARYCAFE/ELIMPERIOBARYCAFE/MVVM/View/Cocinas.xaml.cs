@@ -1,12 +1,15 @@
-namespace ELIMPERIOBARYCAFE;
+using ELIMPERIOBARYCAFE.MVVM.Models;
+using ELIMPERIOBARYCAFE.MVVM.ViewModels;
+using System;
 
-public partial class Cosina : ContentPage
+namespace ELIMPERIOBARYCAFE.MVVM.View;
+
+public partial class Cocinas : ContentPage
 {
-	public Cosina()
+	public Cocinas()
 	{
 		InitializeComponent();
 	}
-
     private async void OnMenuClicked(object sender, EventArgs e)
     {
         // Mostrar el menú de opciones al hacer clic en el botón de tres puntos
@@ -31,4 +34,5 @@ public partial class Cosina : ContentPage
 
         }
     }
+
 }
