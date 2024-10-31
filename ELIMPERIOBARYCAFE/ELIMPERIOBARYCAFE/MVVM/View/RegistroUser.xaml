@@ -45,22 +45,18 @@
                     </Frame>
 
                     <!-- Campos de entrada de nombre y apellido -->
-                    <Entry Placeholder="Nombre" 
+                    <Entry Text="{Binding Nombre_Completo}"
+                        Placeholder="Nombre Completo" 
                    PlaceholderColor="Gray" 
                    TextColor="Black"
                    FontSize="12"
                    BackgroundColor="Transparent"
                    HorizontalOptions="FillAndExpand"/>
 
-                    <Entry Placeholder="Apellido" 
-                   PlaceholderColor="Gray" 
-                   TextColor="Black"
-                   FontSize="12"
-                   BackgroundColor="Transparent"
-                   HorizontalOptions="FillAndExpand"/>
 
                     <!-- Campo de correo -->
-                    <Entry Placeholder="Correo" 
+                    <Entry Text="{Binding Username}"
+                        Placeholder="Usuario" 
                    PlaceholderColor="Gray" 
                    TextColor="Black"
                    FontSize="12"
@@ -69,15 +65,8 @@
                    HorizontalOptions="FillAndExpand"/>
 
                     <!-- Campo de usuario -->
-                    <Entry Placeholder="Usuario" 
-                   PlaceholderColor="Gray" 
-                   TextColor="Black"
-                   FontSize="12"
-                   BackgroundColor="Transparent"
-                   HorizontalOptions="FillAndExpand"/>
-
-                    <!-- Campo de contraseña -->
-                    <Entry Placeholder="Contraseña" 
+                    <Entry Text="{Binding Contraseña}"
+                        Placeholder="Contraseña" 
                    PlaceholderColor="Gray" 
                    TextColor="Black"
                    FontSize="12"
@@ -85,12 +74,32 @@
                    BackgroundColor="Transparent"
                    HorizontalOptions="FillAndExpand"/>
 
+                    <!-- Campo de contraseña -->
+                    <Entry Text="{Binding Email}"
+                        Placeholder="Correo" 
+                   PlaceholderColor="Gray" 
+                   TextColor="Black"
+                   FontSize="12"
+                   BackgroundColor="Transparent"
+                   HorizontalOptions="FillAndExpand"/>
+
                     <!-- Picker para seleccionar el cargo de usuario -->
+
+                    <!--<Entry Text="{Binding Rol}"
+                         Placeholder="Rol" 
+                        PlaceholderColor="Gray" 
+                        TextColor="Black"
+                        FontSize="12"
+                        BackgroundColor="Transparent"
+                        HorizontalOptions="FillAndExpand"/>-->
+
                     <Picker Title="Cargo Usuario"
                     FontSize="12"
                     TextColor="Gray"
                     BackgroundColor="Transparent"
-                    HorizontalOptions="FillAndExpand">
+                    HorizontalOptions="FillAndExpand"
+                            SelectedItem="{Binding Rol}">
+                        
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
                                 <x:String>Cajero</x:String>
@@ -101,13 +110,14 @@
                     </Picker>
 
                     <!-- Botón de registro -->
-                    <Button Text="Registrar"
+                    <Button Text="Nuevo Usuario"
                     FontSize="13"
                     BackgroundColor="Black"
                     TextColor="White"
                     CornerRadius="20"
                     HeightRequest="35"
-                    HorizontalOptions="FillAndExpand"/>
+                    HorizontalOptions="FillAndExpand"
+                    Command="{Binding RegisterCommand}"/>
 
                     <!-- Enlace para volver al login -->
                     <Label Text="¿Ya tienes una cuenta? Inicia sesión"

@@ -18,6 +18,7 @@ using ELIMPERIOBARYCAFE.MVVM.View;
 using System.Text.Json;
 using ELIMPERIOBARYCAFE.MVVM.Models;
 
+
 namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
 {
     public partial class AuthViewModel: ObservableObject
@@ -28,7 +29,11 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
         //Propiedades para el binding de comandos
         public ICommand RegisterCommand { get; }
         public ICommand LoginCommand { get; }
+
+        private string _rol;
         
+
+
         public AuthViewModel(Page page)
         {
             _httpClient = new HttpClient();
@@ -45,7 +50,7 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
         [ObservableProperty] 
         private string contraseña;
         [ObservableProperty]
-        private string nombre;
+        private string nombre_Completo;
         [ObservableProperty]
         private string rol;
         [ObservableProperty]
@@ -56,7 +61,7 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
         {
             var user = new User
             {
-                Nombre_Completo = nombre,
+                Nombre_Completo = nombre_Completo,
                 Username = username,
                 Contraseña = contraseña,
                 Email = email,
@@ -66,11 +71,11 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
 
             try
             {
-                var response = await _httpClient.PostAsJsonAsync("http://localhost:5002/api/Auth/Register", user);
+                var response = await _httpClient.PostAsJsonAsync("http://10.0.2.2:5002/api/Auth/Register", user);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    await _page.DisplayAlert("Registro", "Registro creado exitosamente!", "OK");
+                    await _page.DisplayAlert("Registro", "Usuario creado exitosamente!", "OK");
                     //╚╔╩╦╚╔╩╦D //🚂-🚃-🚃-🚃
                 }
                 else

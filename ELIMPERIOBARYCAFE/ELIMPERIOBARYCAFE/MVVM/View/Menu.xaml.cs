@@ -24,7 +24,7 @@ public partial class Menu : ContentPage
         await Navigation.PushAsync(new Cocinas());
     }
 
-    private async void OnMeseroClicked(object sender, EventArgs e)
+    private async void OnUsuarioClicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new RegistroUser());
     }

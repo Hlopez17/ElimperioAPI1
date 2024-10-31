@@ -31,7 +31,7 @@ namespace ElimperioAPI.Controllers
             return estudiante;
         }
 
-        [HttpPost]
+        [HttpPost("Create")]
         public async Task<IActionResult> Crear(Producto nuevoProducto)
         {
             await _Productoservicios.CrearAsync(nuevoProducto); 

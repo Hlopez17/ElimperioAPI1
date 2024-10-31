@@ -31,10 +31,14 @@
                    Padding="10">
                 <VerticalStackLayout Spacing="5">
                     <Image Source="medicina.png" WidthRequest="40" HeightRequest="40" />
-                    <Label Text="Usuarios"
-                           TextColor="White"
-                           FontSize="Medium"
-                           HorizontalOptions="Center" />
+                    <Button Text="Usuarios"
+                    FontSize="14"
+                    BackgroundColor="White"
+                    TextColor="#373B44" 
+                    CornerRadius="20"
+                    HorizontalOptions="Center"
+                    Margin="0,30,0,0" 
+                    Clicked="OnUsuarioClicked"/> 
                 </VerticalStackLayout>
             </Frame>
 
@@ -67,7 +71,7 @@
                         CornerRadius="20"
                         HorizontalOptions="Center"
                         Margin="0,30,0,0" 
-                        Clicked="OnMeseroClicked"/>
+                        Clicked="OnCajaClicked"/>
                 </VerticalStackLayout>
             </Frame>
 
