@@ -19,7 +19,7 @@ namespace ElimperioAPI.Controllers
         public ProductoController(ProductoService productoServicio)=> _Productoservicios = productoServicio;
 
         
-        [HttpGet]
+        [HttpGet("Get")]
 
         public async Task<List<Producto>> Obtener() => await _Productoservicios.ObtenerAsync();
        
@@ -42,13 +42,18 @@ namespace ElimperioAPI.Controllers
         [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> Actualizar(string id, Producto productoActualizado)
         {
-            var producto = await _Productoservicios.ObtenerAsync(id);
-            if (producto is null) return NotFound();
-            productoActualizado.Id = producto.Id;
-            await _Productoservicios.ActualizarAsync(id, productoActualizado);
-            return NoContent();
+            var estudiante = await _Productoservicios.ObtenerAsync(id);
+            if (estudiante is null) return NotFound();
+            productoActualizado.Id = estudiante.Id;
+            await _Productoservicios.ActualizarAsync(productoActualizado);
+            return Ok("Producto Actualizado exitosamente.");
         }
 
-
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            await _Productoservicios.EliminarAsync(id);
+            return Ok("Producto Eliminado exitosamente.");
+        }
     }
 }

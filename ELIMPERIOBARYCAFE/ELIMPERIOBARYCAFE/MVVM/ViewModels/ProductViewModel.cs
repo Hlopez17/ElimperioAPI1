@@ -31,56 +31,50 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
 
         private readonly string _token;
         private readonly string? _productoid;
+        public readonly string productos;
 
         //Propiedades para el Binding de Comandos
         public ICommand CrearCommand { get; }
         public ICommand EliminarCommand { get; }
+        public ICommand GetCommand { get; }
 
-        public ProductViewModel(Page page, string token, string? productoid = null)
+        public ProductViewModel(Page page, string token)
         {
-            _httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:5002") };
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            _httpClient = new HttpClient();
             _page = page;
+             _httpClient.BaseAddress = new Uri("http://10.0.2.2:5002");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             _token = token;
-            _productoid = productoid;
 
-            //CalificacionesDinamicas = new ObservableCollection<CalificacionDinamica>();
-
-            //AddCalificacionGroupCommand = new Command(AddCalificacionGroup);
-            //SaveNuevaCalificacionCommand = new Command(async () => await SaveNuevaCalificacionAsync());
-            //SaveEstudianteCommand = new Command(async () => await SaveEstudianteAsync());
-            //DeleteCalificacionCommand = new Command<Calificacion>(async (calificacion) => await DeleteCalificacionAsync(calificacion));
-            //EditCalificacionCommand = new Command<Calificacion>(EditCalificacion);
-
-            //IsAddingCalificacion = false; // Iniciar en falso
-
-            //if (!string.IsNullOrEmpty(_estudianteId))
-            //{
-            //    LoadEstudianteCommand = new Command(async () => await LoadEstudianteAsync());
-            //    LoadEstudianteCommand.Execute(null);
-            //}
+            //Crear comandos manualmente 
+            CrearCommand = new Command(async () => await RegisterProd());
+            GetCommand = new Command(async () => await GetProductosAsync());
         }
 
         [ObservableProperty]
-        private string description;
+        private string descripcion;
         [ObservableProperty]
         private string precio;
         [ObservableProperty]
         private string stock;
+        [ObservableProperty]
+        private string categoria;
 
         //Tarea Async para crear productos 
         public async Task RegisterProd()
         {
-            var prod = new Producto
+            var prod = new Producto //Se crea una variable donde se guardaran los datos del modelo
             {
-                Descripcion = description,
+                Descripcion = descripcion,
                 Precio = precio,
-                Stock = stock
+                Stock = stock,
+                Categoria = categoria
+
             };
 
             try
             {
-                var response = await _httpClient.PostAsJsonAsync("http://localhost:5002/api/Producto/Create", prod);
+                var response = await _httpClient.PostAsJsonAsync("http://10.0.2.2:5002/api/Producto/Create", prod);
                 if (response.IsSuccessStatusCode)
                 {
                     await _page.DisplayAlert("Registro", "Producto Creado exitosamente!", "OK");
@@ -95,5 +89,36 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
                 await _page.DisplayAlert("Error", $"Ocurrió un error: {ex.Message}", "OK");
             }
         }
+
+        private  ObservableCollection<Producto> producto { get; set; } = new ObservableCollection<Producto>();
+
+        public async Task GetProductosAsync()
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync("http://10.0.2.2:5002/api/Producto/Get");
+                if (response.IsSuccessStatusCode)
+                {
+                    var productos = await response.Content.ReadFromJsonAsync<List<Producto>>();
+                    producto.Clear();
+                    foreach (var prod in productos)
+                    {
+                        producto.Add(prod);
+                    }
+                }
+                else
+                {
+                    await _page.DisplayAlert("Error", "Error al obtener productos", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await _page.DisplayAlert("Error", $"Ocurrió un error: {ex.Message}", "OK");
+            }
+        }
+
+
+
+
     }
 }

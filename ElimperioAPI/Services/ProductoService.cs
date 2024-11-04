@@ -32,7 +32,18 @@ namespace ElimperioAPI.Services
             await _coleccionProducto.InsertOneAsync(nuevoProducto);
         }
 
-        public async Task ActualizarAsync(string id, Producto productoActualizado) =>
-        await _coleccionProducto.ReplaceOneAsync(x => x.Id == id, productoActualizado);
+        public async Task ActualizarAsync(Producto ProductoUpdate)
+        {
+            var filter = Builders<Producto>.Filter.Eq(x=> x.Id, ProductoUpdate.Id);
+            await _coleccionProducto.ReplaceOneAsync(filter, ProductoUpdate);
+        }
+
+        public async Task EliminarAsync(string id)
+        {
+            var filter = Builders<Producto>
+                .Filter
+                .Eq(x => x.Id, id);
+            await _coleccionProducto.DeleteOneAsync(filter);
+        }
     }
 }

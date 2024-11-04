@@ -8,8 +8,9 @@ public partial class PresentacionInicio : ContentPage
 	{
 		InitializeComponent();
 	}
+    public string token;
     private async void OnComenzarClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new Menu());
+        await Navigation.PushAsync(new Menu(token));
     }
 }

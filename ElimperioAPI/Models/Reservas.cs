@@ -9,7 +9,7 @@ namespace ElimperioAPI.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]  
-        public ObjectId Id { get; set; }
+        public string? Id { get; set; }
        
         [BsonElement("Fecha")]
         public string Fecha  { get; set; }

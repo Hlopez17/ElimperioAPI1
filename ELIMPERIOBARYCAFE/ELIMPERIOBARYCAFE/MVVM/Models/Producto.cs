@@ -13,5 +13,6 @@ namespace ELIMPERIOBARYCAFE.MVVM.Models
         public string Descripcion { get; set; } = null!;
         public string Precio { get; set; } = null!;
         public string Stock { get; set; } = null!;
+        public string Categoria {  get; set; } = null!;
     }
 }

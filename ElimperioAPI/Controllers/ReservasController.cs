@@ -51,20 +51,14 @@ namespace ElimperioAPI.Controllers
 
 
 
-        [HttpPut("{id}")]
-
-        public async Task<IActionResult> Update([FromBody] Reservas reserv, string id)
+        [HttpPut("{id:length(24)}")]
+        public async Task<IActionResult> Actualizar(string id, Reservas reservaActualizado)
         {
-            if (reserv == null)
-                return BadRequest();
-
-            //// podria tener mas validaciones
-            //if (reserv.Name == string.Empty || reserv.Price < 0)
-            //    ModelState.AddModelError("Error al actualizar producto", "Agregue un nombre valido y un precio correcto");
-
-            reserv.Id = new MongoDB.Bson.ObjectId(id);
-            await _reservaService.Update(reserv);
-            return Created("Updated", true);
+            var estudiante = await _reservaService.ObtenerAsync(id);
+            if (estudiante is null) return NotFound();
+            reservaActualizado.Id = estudiante.Id;
+            await _reservaService.ActualizarAsync(id, reservaActualizado);
+            return NoContent();
         }
 
         //public async Task Update(Reservas reserv)

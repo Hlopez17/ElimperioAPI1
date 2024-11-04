@@ -82,10 +82,14 @@
                    Padding="10">
                 <VerticalStackLayout Spacing="5">
                     <Image Source="llamada.png" WidthRequest="40" HeightRequest="40" />
-                    <Label Text="Llamada"
-                           TextColor="White"
-                           FontSize="Medium"
-                           HorizontalOptions="Center" />
+                    <Button Text="Productos"
+                     FontSize="14"
+                     BackgroundColor="White"
+                     TextColor="#373B44" 
+                     CornerRadius="20"
+                     HorizontalOptions="Center"
+                     Margin="0,30,0,0" 
+                     Clicked="OnProdClicked"/>          
                 </VerticalStackLayout>
             </Frame>
 

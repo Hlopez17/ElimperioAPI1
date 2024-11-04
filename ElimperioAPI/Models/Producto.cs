@@ -18,6 +18,11 @@ namespace ElimperioAPI.Models
         public decimal Precio { get; set; } 
 
         [BsonElement("Stock")]
-        public int Stock { get; set; } 
+        public int Stock { get; set; }
+
+        [BsonElement("Categoría")]
+        public string Categoria { get; set; }
+
+        //public List<Proveedor> Proveedores { get; set;} = new List<Proveedor>(); 
     }
 }

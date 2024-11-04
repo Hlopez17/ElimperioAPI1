@@ -24,7 +24,9 @@
             </Frame>
 
             <!-- Campo para el nombre del producto -->
-            <Entry Placeholder="Nombre del producto"
+            <Entry 
+                   Text="{Binding Descripcion}"
+                   Placeholder="Nombre del producto"
                    PlaceholderColor="Gray" 
                    TextColor="Black"
                    FontSize="12"
@@ -32,17 +34,13 @@
                    BackgroundColor="Transparent"
                    HorizontalOptions="FillAndExpand"/>
 
-            <!-- Selector de categoría -->
-            <Picker Title="Categoría" TitleColor="Gray" TextColor="Black">
-                <Picker.Items>
-                    <x:String>Alimentos</x:String>
-                    <x:String>Bebidas</x:String>
-                    <x:String>Otros</x:String>
-                </Picker.Items>
-            </Picker>
+            
+
 
             <!-- Campo para el precio del producto -->
-            <Entry Placeholder="Precio del producto"
+            <Entry 
+                   Text="{Binding Precio}"
+                   Placeholder="Precio del producto"
                    PlaceholderColor="Gray"
                    TextColor="Black"
                    FontSize="12"
@@ -52,7 +50,9 @@
                    HorizontalOptions="FillAndExpand"/>
 
             <!-- Campo para el stock disponible -->
-            <Entry Placeholder="Stock"
+            <Entry 
+                   Text="{Binding Stock}"
+                   Placeholder="Stock"
                    PlaceholderColor="Gray"
                    TextColor="Black"
                    FontSize="12"
@@ -60,6 +60,22 @@
                    Keyboard="Numeric"
                    BackgroundColor="Transparent"
                    HorizontalOptions="FillAndExpand"/>
+
+            <!-- Selector de categoría -->
+            <Picker Title="Categoria"
+                 FontSize="12"
+                 TextColor="Gray"
+                 BackgroundColor="Transparent"
+                 HorizontalOptions="FillAndExpand"
+                 SelectedItem="{Binding Categoria}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Bebida</x:String>
+                            <x:String>Comida</x:String>
+                            <x:String>Postre</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+            </Picker>
             <!-- Tabla para mostrar los productos actuales -->
             <Label Text="Productos Actuales:" FontAttributes="Bold" />
             <CollectionView x:Name="productosActuales"
@@ -79,7 +95,7 @@
             <!-- Botones de Guardar y Cancelar -->
             <HorizontalStackLayout Spacing="10">
                 <Button Text="Registrar" FontSize="14" 
-                        BackgroundColor="Black" TextColor="White" HorizontalOptions="FillAndExpand"/>
+                        BackgroundColor="Black" TextColor="White" HorizontalOptions="FillAndExpand" Command="{Binding CrearCommand}"/>
                 <Button Text="Cancelar" FontSize="14" BackgroundColor="Black" TextColor="White" HorizontalOptions="FillAndExpand"/>
             </HorizontalStackLayout>
 

@@ -5,13 +5,15 @@ namespace ELIMPERIOBARYCAFE.MVVM.View;
 
 public partial class Menu : ContentPage
 {
-	public Menu()
+    private readonly string _token;
+    public Menu(string token)
 	{
 		InitializeComponent();
-	}
+        _token = token;
+    }
 
     int count = 0;
-
+    public string token;
   
     // Método manejador del evento OnMenuClicked
     private void OnMenuClicked(object sender, EventArgs e)
@@ -33,5 +35,11 @@ public partial class Menu : ContentPage
     {
         //await Shell.Current.GoToAsync("CajaPage"); // Asegúrate de registrar esta ruta si existe
     }
+
+    private async void OnProdClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new Productos(_token));
+    }
+
 }
 

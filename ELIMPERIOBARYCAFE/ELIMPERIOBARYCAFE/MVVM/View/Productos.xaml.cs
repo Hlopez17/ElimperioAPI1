@@ -1,9 +1,15 @@
+using ELIMPERIOBARYCAFE.MVVM.Models;
+using ELIMPERIOBARYCAFE.MVVM.ViewModels;
+
 namespace ELIMPERIOBARYCAFE.MVVM.View;
 
 public partial class Productos : ContentPage
 {
-	public Productos()
+    private readonly string _token;
+    public Productos(string token)
 	{
 		InitializeComponent();
-	}
+        _token = token;
+        BindingContext = new ProductViewModel(this, _token);
+    }
 }

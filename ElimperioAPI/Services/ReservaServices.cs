@@ -19,6 +19,10 @@ namespace ElimperioAPI.Services
             _coleccionreservas = BaseDatos.GetCollection<Reservas>("Reservas");
         }
 
+
+        public async Task<List<Reservas>> ObtenerAsync() => await _coleccionreservas.Find(_ => true).ToListAsync();
+        public async Task<Reservas> ObtenerAsync(string id) => await _coleccionreservas.Find(x => x.Id == id).FirstOrDefaultAsync();
+
         public async Task<List<Reservas>> Get()
           => await _coleccionreservas.FindAsync(
               new BsonDocument()).Result.ToListAsync();
@@ -32,22 +36,18 @@ namespace ElimperioAPI.Services
             await _coleccionreservas.InsertOneAsync(reserva);
         }
 
-        public async Task Update(Reservas product)
+        public async Task ActualizarAsync(Reservas ReservaUpdate)
+        {
+            var filter = Builders<Reservas>.Filter.Eq(x => x.Id, ReservaUpdate.Id);
+            await _coleccionreservas.ReplaceOneAsync(filter, ReservaUpdate);
+        }
+
+        public async Task EliminarAsync(string id)
         {
             var filter = Builders<Reservas>
                 .Filter
-                .Eq(x => x.Id, product.Id);
-
-            await _coleccionreservas.ReplaceOneAsync(filter, product);
+                .Eq(x => x.Id, id);
+            await _coleccionreservas.DeleteOneAsync(filter);
         }
-
-        //public async Task Delete(string id)
-        //{
-        //    var filter = Builders<Reservas>
-        //        .Filter
-        //        .Eq(x => x.Id, new ObjectId(id));
-
-        //    await _coleccionreservas.DeleteOneAsync(filter);
-        //}
     }
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ELIMPERIOBARYCAFE.MVVM.View.Inventario"
+             Title="Inventario">
+    <!--<ContentPage.BindingContext>
+        --><!-- Vincula la página a tu ViewModel --><!--
+        <local:ProductoViewModel />
+    </ContentPage.BindingContext>-->
+
+    <CollectionView ItemsSource="{Binding producto}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <StackLayout Padding="10">
+                    <!-- Muestra la información de cada producto -->
+                    <Label Text="{Binding Descripcion}" FontSize="18" TextColor="Black"/>
+                    <Label Text="{Binding Precio, StringFormat='Precio: {0:C}'}" FontSize="14" TextColor="Gray"/>
+                    <Label Text="{Binding Stock, StringFormat='Stock: {0}'}" FontSize="14" TextColor="Gray"/>
+                </StackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>
