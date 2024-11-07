@@ -18,17 +18,6 @@ namespace ElimperioAPI.Services
 
         }
 
-        public async Task<User?> ObtenerUsuarioAsync(string username)
-           => await _coleccionUsuarios.Find(u => u.Username == username).FirstOrDefaultAsync();
-
-        public async Task CrearUsuarioAsync(User nuevoUsuario)
-
-            => await _coleccionUsuarios.InsertOneAsync(nuevoUsuario);
-
-        public async Task<List<User>> Get()
-           => await _coleccionUsuarios.FindAsync(
-               new BsonDocument()).Result.ToListAsync();
-
         // Validación de usuario y contraseña
         public async Task<User?> LoginAsync(string username, string password)
         {
@@ -37,5 +26,19 @@ namespace ElimperioAPI.Services
 
             return await _coleccionUsuarios.Find(filter).FirstOrDefaultAsync();
         }
+
+        public async Task<User?> ObtenerUsuarioAsync(string username)
+           => await _coleccionUsuarios.Find(u => u.Username == username).FirstOrDefaultAsync();
+
+        //T=Tarea asincrona para crear un nuevo usuario
+        public async Task CrearUsuarioAsync(User nuevoUsuario)
+
+            => await _coleccionUsuarios.InsertOneAsync(nuevoUsuario);
+
+        public async Task<List<User>> Get()
+           => await _coleccionUsuarios.FindAsync(
+               new BsonDocument()).Result.ToListAsync();
+
+       
     }
 }

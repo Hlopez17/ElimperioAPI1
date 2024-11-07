@@ -14,12 +14,12 @@ namespace ElimperioAPI.Models
         public string Razon_Social { get; set; } = null!;
 
         [BsonElement("Representante")]
-        public string Representante { get; set; }
+        public string? Representante { get; set; }
 
         [BsonElement("Telefono")]
         public int Telefono { get; set; }
 
         [BsonElement("Dirección")]
-        public string Direccion { get; set; }
+        public string? Direccion { get; set; }
     }
 }

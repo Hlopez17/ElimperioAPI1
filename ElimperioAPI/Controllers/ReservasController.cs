@@ -13,7 +13,7 @@ namespace ElimperioAPI.Controllers
     [ApiController]
     public class ReservasController : ControllerBase
     {
-        private ReservaServices _reservaService;
+        private readonly ReservaServices _reservaService;
 
         public ReservasController(ReservaServices reservaService)
         {
@@ -57,7 +57,7 @@ namespace ElimperioAPI.Controllers
             var estudiante = await _reservaService.ObtenerAsync(id);
             if (estudiante is null) return NotFound();
             reservaActualizado.Id = estudiante.Id;
-            await _reservaService.ActualizarAsync(id, reservaActualizado);
+            await _reservaService.ActualizarAsync(reservaActualizado);
             return NoContent();
         }
 

@@ -25,38 +25,6 @@ namespace UniveridadAPI.Controllers
             _configuration = configuration;
         }
 
-        //[HttpPost("login")]
-        //public async Task<IActionResult> Login([FromBody] User user)
-        //{
-        //    var existingUser = await
-        //    _userService.ObtenerUsuarioAsync(user.Username);
-
-        //    if (existingUser == null || existingUser.Contraseña != user.Contraseña)
-        //        return Unauthorized();
-
-        //    var token = GenerateJwtToken(existingUser.Username); return Ok(new { Token = token });
-        //}
-
-
-        //[HttpGet]
-        //public async Task<IActionResult> Get()
-        //{
-        //    return Ok(await _userService.Get());
-        //}
-
-        //[HttpPost("register")]
-        //public async Task<IActionResult> Register([FromBody] User user)
-        //{
-        //    var existingUser = await
-        //    _userService.ObtenerUsuarioAsync(user.Username); if (existingUser != null)
-        //    {
-        //        return Conflict("El usuario ya existe.");
-        //    }
-
-        //    await _userService.CrearUsuarioAsync(user);
-        //    return Ok("Usuario registrado exitosamente.");
-        //}
-
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] User user)
         {
