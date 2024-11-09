@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +18,7 @@ using System.Net.Http.Headers;
 
 namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
 {
-    public partial class SupplierViewModel
+    public partial class SupplierViewModel :ObservableObject
     {
         private readonly HttpClient _httpClient;
         private readonly Page _page; // Referencia  a la página
@@ -43,19 +38,21 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             _token = token;
 
-            //Crear comandos manualmente 
+            //Crear comandos manualmente
             CrearCommand = new Command(async () => await RegisterProv());
             //GetCommand = new Command(async () => await GetProductosAsync());
         }
 
         [ObservableProperty]
-        private string razonsocial;
+        public string razonsocial;
         [ObservableProperty]
-        private string representante;
+        public string representante;
         [ObservableProperty]
-        private int telefono;
+        public int telefono;
         [ObservableProperty]
-        private string direccion;
+        public string direccion;
+
+
         //Tarea Async para crear productos 
         public async Task RegisterProv()
         {

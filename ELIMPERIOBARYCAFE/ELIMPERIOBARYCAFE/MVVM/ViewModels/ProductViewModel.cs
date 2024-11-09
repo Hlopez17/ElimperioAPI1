@@ -54,9 +54,9 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
         [ObservableProperty]
         private string descripcion;
         [ObservableProperty]
-        private string precio;
+        private double precio;
         [ObservableProperty]
-        private string stock;
+        private int stock;
         [ObservableProperty]
         private string categoria;
 

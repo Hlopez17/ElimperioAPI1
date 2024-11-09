@@ -11,5 +11,16 @@ public partial class Productos : ContentPage
 		InitializeComponent();
         _token = token;
         BindingContext = new ProductViewModel(this, _token);
+        viewModel = new ProductViewModel(this, _token);
     }
+
+    private ProductViewModel viewModel;
+
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await viewModel.GetProductosAsync();
+    }
+
 }

@@ -23,12 +23,6 @@ namespace ElimperioAPI.Services
 
         public async Task CrearAsync(Producto nuevoProducto)
         {
-            //// Asignar un ObjectId a cada calificación si no tiene uno
-            //foreach (var calificacion in nuevoEstudiante.Calificaciones)
-            //{
-
-            //    calificacion.Id = ObjectId.GenerateNewId().ToString();
-            //}
             await _coleccionProducto.InsertOneAsync(nuevoProducto);
         }
 

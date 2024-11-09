@@ -11,6 +11,7 @@ namespace ElimperioAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ReservasController : ControllerBase
     {
         private readonly ReservaServices _reservaService;
@@ -59,6 +60,14 @@ namespace ElimperioAPI.Controllers
             reservaActualizado.Id = estudiante.Id;
             await _reservaService.ActualizarAsync(reservaActualizado);
             return NoContent();
+        }
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            await _reservaService.EliminarAsync(id);
+            return Ok("Producto Eliminado exitosamente.");
         }
 
         //public async Task Update(Reservas reserv)

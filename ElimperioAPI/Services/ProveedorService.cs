@@ -21,20 +21,10 @@ namespace ElimperioAPI.Services
         public async Task<List<Proveedor>> ObtenerAsync() => await _coleccionProveedor.Find(_ => true).ToListAsync();
         public async Task<Proveedor> ObtenerAsync(string id) => await _coleccionProveedor.Find(x => x.Id == id).FirstOrDefaultAsync();
 
-        public async Task<List<Proveedor>> Get()
-          => await _coleccionProveedor.FindAsync(
-              new BsonDocument()).Result.ToListAsync();
-
-        public async Task<Proveedor> GetById(string id)
-            => await _coleccionProveedor.FindAsync(
-                new BsonDocument { { "_id", new ObjectId(id) } }).Result.FirstAsync();
-
         public async Task InsertarProvAsync(Proveedor Suppliers)
         {
             await _coleccionProveedor.InsertOneAsync(Suppliers);
         }
-
-
 
         public async Task ActualizarAsync(Proveedor ReservaUpdate)
         {

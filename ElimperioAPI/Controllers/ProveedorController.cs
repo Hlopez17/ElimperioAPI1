@@ -11,6 +11,7 @@ namespace ElimperioAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProveedorController: ControllerBase
     {
         private readonly ProveedorService _Suppliersservice;

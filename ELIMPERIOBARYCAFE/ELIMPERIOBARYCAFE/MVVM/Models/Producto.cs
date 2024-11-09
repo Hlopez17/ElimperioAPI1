@@ -11,8 +11,8 @@ namespace ELIMPERIOBARYCAFE.MVVM.Models
     {
         public string? Id { get; set; }
         public string Descripcion { get; set; } = null!;
-        public string Precio { get; set; } = null!;
-        public string Stock { get; set; } = null!;
+        public double Precio { get; set; }
+        public int Stock { get; set; } 
         public string Categoria {  get; set; } = null!;
     }
 }

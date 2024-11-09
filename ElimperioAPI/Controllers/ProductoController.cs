@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
 using ElimperioAPI.Models;
 using ElimperioAPI.Services;
 using MongoDB.Driver;
@@ -11,7 +10,6 @@ namespace ElimperioAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class ProductoController:ControllerBase
     {
         private readonly ProductoService _Productoservicios;
