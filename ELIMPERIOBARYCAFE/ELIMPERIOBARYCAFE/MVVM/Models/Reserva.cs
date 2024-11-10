@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ELIMPERIOBARYCAFE.MVVM.Models
 {
-     class Reserva
+     public class Reserva
     {
         public string? Id { get; set; }
         public string Fecha { get; set; }

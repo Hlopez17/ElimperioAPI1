@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ELIMPERIOBARYCAFE.MVVM.Models
 {
-     class Proveedor
+     public class Proveedor
     {
         public string? Id { get; set; }
 

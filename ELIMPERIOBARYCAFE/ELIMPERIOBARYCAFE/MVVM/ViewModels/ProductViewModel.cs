@@ -28,10 +28,15 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
     {
         private readonly HttpClient _httpClient;
         private readonly Page _page; // Referencia  a la página
-
+        public ObservableCollection<Producto> Producto { get; } = new ObservableCollection<Producto>();
         private readonly string _token;
         private readonly string? _productoid;
         public readonly string productos;
+
+        public string Descripcion {  get; set; }
+        public double Precio { get; set; }
+        public string Categoria { get; set; }
+        public int Stock { get; set; }
 
         //Propiedades para el Binding de Comandos
         public ICommand CrearCommand { get; }
@@ -90,20 +95,20 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
             }
         }
 
-        private  ObservableCollection<Producto> producto { get; set; } = new ObservableCollection<Producto>();
+      
 
         public async Task GetProductosAsync()
         {
             try
             {
-                var response = await _httpClient.GetAsync("http://10.0.2.2:5002/api/Producto/Get");
+                var response = await _httpClient.GetAsync("api/ProductoController");
                 if (response.IsSuccessStatusCode)
                 {
                     var productos = await response.Content.ReadFromJsonAsync<List<Producto>>();
-                    producto.Clear();
+                    Producto.Clear();
                     foreach (var prod in productos)
                     {
-                        producto.Add(prod);
+                        Producto.Add(prod);
                     }
                 }
                 else
