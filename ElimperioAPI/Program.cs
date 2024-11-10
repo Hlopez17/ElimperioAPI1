@@ -13,6 +13,7 @@ builder.Services.AddSingleton<ProductoService>();
 builder.Services.AddSingleton<UserService>();
 builder.Services.AddSingleton<ReservaServices>();
 builder.Services.AddSingleton<ProveedorService>();
+builder.Services.AddSingleton<MesaService>();
 
 builder.Services.AddControllers()
 .AddJsonOptions(
