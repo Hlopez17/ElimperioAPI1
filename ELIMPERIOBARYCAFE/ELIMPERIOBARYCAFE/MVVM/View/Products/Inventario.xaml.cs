@@ -1,3 +1,4 @@
+using ELIMPERIOBARYCAFE.MVVM.Models;
 using ELIMPERIOBARYCAFE.MVVM.ViewModels;
 
 namespace ELIMPERIOBARYCAFE.MVVM.View;
@@ -6,18 +7,15 @@ public partial class Inventario : ContentPage
 {
     private ProductViewModel viewModel;
     private readonly string _token;
-    public Inventario()
-	{
+    public Inventario(string token)
+    {
 		InitializeComponent();
-        viewModel = new ProductViewModel(this, _token);
+        _token = token;
+
+        viewModel = new ProductViewModel(this, _token);//La posición en la que llamaba esta onda
+        viewModel.GetProductosAsync();
         BindingContext = viewModel;
     }
 
-   
-    protected override async void OnAppearing()
-    {
-        base.OnAppearing();
-        await viewModel.GetProductosAsync();
-    }
 
 }

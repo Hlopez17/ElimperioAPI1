@@ -47,7 +47,7 @@ namespace ElimperioAPI.Controllers
             return Ok("Producto Actualizado exitosamente.");
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete{id}")]
         public async Task<IActionResult> Delete(string id)
         {
             await _Productoservicios.EliminarAsync(id);

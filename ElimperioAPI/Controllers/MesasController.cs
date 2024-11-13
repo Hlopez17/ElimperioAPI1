@@ -19,21 +19,17 @@ namespace ElimperioAPI.Controllers
             _mesaService = mesaService;
         }
 
+      
         // Obtener una mesa por su Id
-        [HttpGet("{id:length(24)}")]
-        public async Task<ActionResult<Mesa>> Get(string id)
+        [HttpPost()]
+        public async Task<ActionResult<Mesa>> Crear(Mesa nuevamesa)
         {
-            var mesa = await _mesaService.GetMesaByIdAsync(id);
-
-            if (mesa == null)
-            {
+            
                 // Si no existe, creamos una nueva mesa vacía
                 var nuevaMesa = new Mesa();
                 await _mesaService.CreateMesaAsync(nuevaMesa);
                 return nuevaMesa;
-            }
-
-            return mesa;
+            
         }
 
         // Agregar un pedido a una mesa por su Id

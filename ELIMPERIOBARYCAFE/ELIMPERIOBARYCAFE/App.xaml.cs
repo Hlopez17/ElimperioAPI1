@@ -4,11 +4,12 @@ namespace ELIMPERIOBARYCAFE
 {
     public partial class App : Application
     {
+        public string token;
         public App()
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new Inventario());
+            MainPage = new NavigationPage(new Auth());
         }
     }
 }

@@ -1,30 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using System.Windows.Input;
-using System.Net;
-using System.Net.Sockets;
-using ELIMPERIOBARYCAFE.MVVM.View;
-using System.Text.Json;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using ELIMPERIOBARYCAFE.MVVM.Models;
-using System.Threading.Tasks;
+using ELIMPERIOBARYCAFE.MVVM.View.Products;
 using System.Collections.ObjectModel;
+using System;
+using System.Linq;
 using System.Net.Http.Headers;
-
+using System.Net.Http.Json;
+using System.Windows.Input;
 
 namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
 {
-    public partial class ProductViewModel: ObservableObject
+    public partial class ProductViewModel : ObservableObject
     {
         private readonly HttpClient _httpClient;
         private readonly Page _page; // Referencia  a la página
@@ -33,27 +19,29 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
         private readonly string? _productoid;
         public readonly string productos;
 
-        public string Descripcion {  get; set; }
-        public double Precio { get; set; }
-        public string Categoria { get; set; }
-        public int Stock { get; set; }
+        //public string Descripcion {  get; set; }
+        //public double Precio { get; set; }
+        //public string Categoria { get; set; }
+        //public int Stock { get; set; }
 
         //Propiedades para el Binding de Comandos
         public ICommand CrearCommand { get; }
         public ICommand EliminarCommand { get; }
         public ICommand GetCommand { get; }
+        public ICommand VerCommand { get; }
 
         public ProductViewModel(Page page, string token)
         {
             _httpClient = new HttpClient();
             _page = page;
-             _httpClient.BaseAddress = new Uri("http://10.0.2.2:5002");
+            _httpClient.BaseAddress = new Uri("http://10.0.2.2:5002");
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             _token = token;
-
+            string id;
             //Crear comandos manualmente 
             CrearCommand = new Command(async () => await RegisterProd());
             GetCommand = new Command(async () => await GetProductosAsync());
+            EliminarCommand = new Command<string>(async (id) => await EliminarProductAsync(id));
         }
 
         [ObservableProperty]
@@ -64,6 +52,11 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
         private int stock;
         [ObservableProperty]
         private string categoria;
+
+
+
+
+
 
         //Tarea Async para crear productos 
         public async Task RegisterProd()
@@ -95,13 +88,84 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
             }
         }
 
-      
+
+        public async Task EliminarProductAsync(string id)
+        {
+            System.Diagnostics.Debug.WriteLine($"ID del Producto a eliminar: {id}"); // Verifica el ID
+            bool confirm = await App.Current.MainPage.DisplayAlert("Confirmar", "¿Desea eliminar este producto?", "Sí", "No");
+            if (confirm)
+            {
+                try
+                {
+                    var response = await _httpClient.DeleteAsync($"http://10.0.2.2:5002/api/Producto/Delete{id}");
+                    response.EnsureSuccessStatusCode();
+
+                    await GetProductosAsync();
+                    await App.Current.MainPage.DisplayAlert("Éxito", "Producto eliminado correctamente", "OK");
+                }
+                catch (HttpRequestException httpEx)
+                {
+                    await App.Current.MainPage.DisplayAlert("Error", $"No se pudo eliminar el cliente: {httpEx.Message}", "OK");
+                }
+                catch (Exception ex)
+                {
+                    await App.Current.MainPage.DisplayAlert("Error", $"No se pudo eliminar el cliente: {ex.Message}", "OK");
+                }
+            }
+        }
+        public async Task EditClientesAsync(string id)
+        {
+            // Navegar a la vista de editar Producto
+            await _page.Navigation.PushAsync(new EditProducts(id));
+        }
+
+
+        //public async Task Crearcliente()
+        //{
+        //    await _page.Navigation.PushAsync(new CrearCliente());
+        //}
+        //public async Task StoreCliente()
+        //{
+        //    try
+        //    {
+        //        var nuevoCliente = new Clientes
+        //        {
+        //            Nombre = Nombre ?? string.Empty,
+        //            Cedula = Cedula ?? string.Empty,
+        //            Telefono = Telefono,
+        //            Correo = Correo ?? string.Empty,
+        //            Password = Password ?? string.Empty,
+        //            Estado = "Activo",
+        //            Direccion = Direccion ?? string.Empty,
+        //            Fecha = Fecha,
+        //            HoraReservacion = HoraReservacion.ToString(),  // Convertir a string
+        //            HoraFinanReservacion = HoraFinanReservacion.ToString()  // Convertir a string
+        //        };
+
+        //        var response = await _httpClient.PostAsJsonAsync("/api/ControllerCliente", nuevoCliente);
+        //        response.EnsureSuccessStatusCode();
+
+        //        Clientes.Add(nuevoCliente);
+        //        GetCustomers();
+        //        await App.Current.MainPage.DisplayAlert("Éxito", "Cliente guardado correctamente", "OK");
+        //        await Application.Current.MainPage.Navigation.PopAsync();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Aquí puedes usar un sistema de logging, por ejemplo, Serilog o NLog
+        //        System.Diagnostics.Debug.WriteLine($"Error al guardar el cliente: {ex}");
+
+        //        await App.Current.MainPage.DisplayAlert("Error", $"No se pudo guardar el cliente: {ex.Message}", "OK");
+
+        //    }
+        //}
 
         public async Task GetProductosAsync()
         {
+
             try
             {
-                var response = await _httpClient.GetAsync("api/ProductoController");
+                var response = await _httpClient.GetAsync("http://10.0.2.2:5002/api/Producto/Get");
                 if (response.IsSuccessStatusCode)
                 {
                     var productos = await response.Content.ReadFromJsonAsync<List<Producto>>();
@@ -122,6 +186,17 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
             }
         }
 
+        //response.EnsureSuccessStatusCode();
+        //var productos = await response.Content.ReadFromJsonAsync<List<Producto>>();
+        ////Producto.Clear();
+        //if(productos != null)
+        //{
+        //    foreach (var item in productos)
+        //    {
+        //        Producto.Add(item);
+        //    }
+
+        //}
 
 
 
