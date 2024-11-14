@@ -11,14 +11,23 @@ namespace ElimperioAPI.Models
 
 
         [BsonElement("Mesa")]
-        public string Mesa { get; set; } = null!;
-        [BsonElement("Tipo de Pago")] public string Tipopago { get; set; } = null!;
+        public int NumeroMesa { get; set; }
+        [BsonElement("PedidoID")]
+        public string? PedidoId { get; set; } // Id del pedido más reciente para referencia
+        [BsonElement("Tipo de Pago")] 
+        public string Tipopago { get; set; } = null!;
 
         [BsonElement("Total")]
         public int Total { get; set; }
+        [BsonElement("Descuento")]
+        public decimal Descuento { get; set; }
 
         [BsonElement("Fecha")]
-        public DateTime Fecha { get; set; }
+        public DateTime FechaCobro { get; set; } = DateTime.Now; // Fecha del cobro
 
+
+ 
+   
     }
 }
+

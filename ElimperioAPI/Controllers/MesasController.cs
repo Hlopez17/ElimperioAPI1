@@ -13,24 +13,25 @@ namespace ElimperioAPI.Controllers
     public class MesasController : ControllerBase
     {
         private readonly MesaService _mesaService;
-
+        
         public MesasController(MesaService mesaService)
         {
             _mesaService = mesaService;
         }
+        
 
-      
-        // Obtener una mesa por su Id
-        [HttpPost()]
-        public async Task<ActionResult<Mesa>> Crear(Mesa nuevamesa)
+        [HttpPost]
+        public async Task<ActionResult<Mesa>> Crear([FromBody] Mesa nuevamesa)
         {
-            
-                // Si no existe, creamos una nueva mesa vacía
-                var nuevaMesa = new Mesa();
-                await _mesaService.CreateMesaAsync(nuevaMesa);
-                return nuevaMesa;
-            
+            if (nuevamesa == null)
+            {
+                return BadRequest("Los datos de la mesa no son válidos.");
+            }
+
+            var mesaCreada = await _mesaService.CreateMesaAsync(nuevamesa);
+            return CreatedAtAction(nameof(Crear), new { id = mesaCreada.Id }, mesaCreada);
         }
+
 
         // Agregar un pedido a una mesa por su Id
         [HttpPost("{id:length(24)}/pedido")]
@@ -58,9 +59,17 @@ namespace ElimperioAPI.Controllers
             return mesa;
         }
 
+        //[HttpPost]
+        //public async Task<ActionResult<Pedido>> CrearPedido([FromBody] Pedido pedido)
+        //{
+        //    var pedidoCreado = await _pedidoService.CrearPedidoAsync(pedido);
+        //    return CreatedAtAction(nameof(CrearPedido), new { id = pedidoCreado.Id }, pedidoCreado);
+        //}
+
+
         // Actualizar un pedido existente en una mesa por el Id de la mesa y el Id del pedido
         [HttpPut("{mesaId:length(24)}/pedido/{pedidoId:length(24)}")]
-        public async Task<IActionResult> UpdatePedido(string mesaId, string pedidoId, Pedido pedidoActualizado)
+        public async Task<IActionResult> UpdatePedido(string mesaId, double pedidoId, Pedido pedidoActualizado)
         {
             var mesa = await _mesaService.GetMesaByIdAsync(mesaId);
 
@@ -86,6 +95,9 @@ namespace ElimperioAPI.Controllers
 
             return NoContent();
         }
+
+      
+
     }
 }
 

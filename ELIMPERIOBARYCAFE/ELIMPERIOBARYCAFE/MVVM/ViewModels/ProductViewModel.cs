@@ -41,7 +41,7 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
             //Crear comandos manualmente 
             CrearCommand = new Command(async () => await RegisterProd());
             GetCommand = new Command(async () => await GetProductosAsync());
-            EliminarCommand = new Command<string>(async (id) => await EliminarProductAsync(id));
+            EliminarCommand = new Command<Producto>(async producto => await EliminarProducto(producto));
         }
 
         [ObservableProperty]
@@ -89,27 +89,21 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
         }
 
 
-        public async Task EliminarProductAsync(string id)
+        // Método para eliminar un producto
+        public async Task EliminarProducto(Producto producto)
         {
-            System.Diagnostics.Debug.WriteLine($"ID del Producto a eliminar: {id}"); // Verifica el ID
-            bool confirm = await App.Current.MainPage.DisplayAlert("Confirmar", "¿Desea eliminar este producto?", "Sí", "No");
-            if (confirm)
+            var confirmado = await _page.DisplayAlert("Eliminar", $"¿Desea eliminar el producto {producto.Descripcion}?", "Sí", "No");
+            if (confirmado)
             {
-                try
+                var response = await _httpClient.DeleteAsync($"api/Producto/{producto.Id}");
+                if (response.IsSuccessStatusCode)
                 {
-                    var response = await _httpClient.DeleteAsync($"http://10.0.2.2:5002/api/Producto/Delete{id}");
-                    response.EnsureSuccessStatusCode();
-
-                    await GetProductosAsync();
-                    await App.Current.MainPage.DisplayAlert("Éxito", "Producto eliminado correctamente", "OK");
+                    Producto.Remove(producto);
+                    await _page.DisplayAlert("Eliminar", "Producto eliminado exitosamente.", "OK");
                 }
-                catch (HttpRequestException httpEx)
+                else
                 {
-                    await App.Current.MainPage.DisplayAlert("Error", $"No se pudo eliminar el cliente: {httpEx.Message}", "OK");
-                }
-                catch (Exception ex)
-                {
-                    await App.Current.MainPage.DisplayAlert("Error", $"No se pudo eliminar el cliente: {ex.Message}", "OK");
+                    await _page.DisplayAlert("Error", "Error al eliminar el producto", "OK");
                 }
             }
         }
