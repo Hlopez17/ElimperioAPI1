@@ -13,7 +13,6 @@ public partial class Menu : ContentPage
     }
 
     int count = 0;
-    public string token;
   
     // Método manejador del evento OnMenuClicked
     private void OnMenuClicked(object sender, EventArgs e)
@@ -33,7 +32,7 @@ public partial class Menu : ContentPage
 
     private async void OnCajaClicked(object sender, EventArgs e)
     {
-        //await Shell.Current.GoToAsync("CajaPage"); // Asegúrate de registrar esta ruta si existe
+        await Navigation.PushAsync(new Mesero(_token));
     }
 
     private async void OnProdClicked(object sender, EventArgs e)

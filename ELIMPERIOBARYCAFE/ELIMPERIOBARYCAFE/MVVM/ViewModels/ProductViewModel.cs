@@ -55,9 +55,6 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
 
 
 
-
-
-
         //Tarea Async para crear productos 
         public async Task RegisterProd()
         {

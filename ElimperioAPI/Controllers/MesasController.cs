@@ -13,20 +13,22 @@ namespace ElimperioAPI.Controllers
     public class MesasController : ControllerBase
     {
         private readonly MesaService _mesaService;
+        private int _id = 1;
         
         public MesasController(MesaService mesaService)
         {
             _mesaService = mesaService;
         }
         
-
-        [HttpPost]
+        //Método para crear
+        [HttpPost("Create")]
         public async Task<ActionResult<Mesa>> Crear([FromBody] Mesa nuevamesa)
         {
             if (nuevamesa == null)
             {
                 return BadRequest("Los datos de la mesa no son válidos.");
             }
+
 
             var mesaCreada = await _mesaService.CreateMesaAsync(nuevamesa);
             return CreatedAtAction(nameof(Crear), new { id = mesaCreada.Id }, mesaCreada);
@@ -45,13 +47,13 @@ namespace ElimperioAPI.Controllers
             }
 
             // Calcular el total del pedido individual
-            nuevoPedido.Total = nuevoPedido.Cantidad * nuevoPedido.Precio;
+            nuevoPedido.Importe = nuevoPedido.Cantidad * nuevoPedido.Precio;
 
             // Agregar el nuevo pedido a la lista de pedidos de la mesa
-            mesa.Pedidos.Add(nuevoPedido);
+            mesa.Pedidos1.Add(nuevoPedido);
 
-            // Actualizar el total acumulado de la mesa
-            mesa.Total += nuevoPedido.Total;
+            // Actualizar el total acumulado de la mesawh
+            mesa.Total += nuevoPedido.Importe;
 
             // Actualizar la mesa en la base de datos
             await _mesaService.UpdateMesaAsync(mesa.Id, mesa);
@@ -78,7 +80,7 @@ namespace ElimperioAPI.Controllers
                 return NotFound();
             }
 
-            var pedido = mesa.Pedidos.Find(p => p.Id == pedidoId);
+            var pedido = mesa.Pedidos1.Find(p => p.Id == pedidoId);
             if (pedido == null)
             {
                 return NotFound();
@@ -86,9 +88,9 @@ namespace ElimperioAPI.Controllers
 
             // Actualizar el pedido existente
             pedido.Cantidad = pedidoActualizado.Cantidad;
-            pedido.Producto = pedidoActualizado.Producto;
+            pedido.Productop = pedidoActualizado.Productop;
             pedido.Precio = pedidoActualizado.Precio;
-            pedido.Total = pedido.Cantidad * pedido.Precio;
+            pedido.Importe = pedido.Cantidad * pedido.Precio;
 
             // Actualizar la mesa en la base de datos
             await _mesaService.UpdateMesaAsync(mesa.Id, mesa);
@@ -96,7 +98,8 @@ namespace ElimperioAPI.Controllers
             return NoContent();
         }
 
-      
+       
+
 
     }
 }

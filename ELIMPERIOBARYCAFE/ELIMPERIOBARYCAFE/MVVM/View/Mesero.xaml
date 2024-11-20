@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ELIMPERIOBARYCAFE.MVVM.ViewModels"
              x:Class="ELIMPERIOBARYCAFE.Mesero"
-             BackgroundColor="white">
+             BackgroundColor="white"
+             Title="Pedido">
+
 
     <!-- Definir ScrollView para permitir el desplazamiento -->
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="10" VerticalOptions="FillAndExpand">
-
-            <AbsoluteLayout HorizontalOptions="FillAndExpand">
-                <!-- Botón de tres puntos-->
-                <ImageButton Source="tres_puntos.png"
-                             Clicked="OnMenuClicked"
-                             WidthRequest="5"  
-                             HeightRequest="5"
-                             BackgroundColor="Transparent" 
-                             AbsoluteLayout.LayoutBounds="1,0,AutoSize,AutoSize"
-                             AbsoluteLayout.LayoutFlags="PositionProportional" />
-            </AbsoluteLayout>
 
             <!-- Frame para el logo -->
             <Frame Grid.Row="0"
@@ -35,58 +27,90 @@
                        VerticalOptions="Center" />
             </Frame>
 
-            <!-- Campo para el número de mesa -->
-            <Entry Placeholder="Mesa"
-                   PlaceholderColor="Gray" 
-                   TextColor="Black"
-                   FontSize="12"
-                   HeightRequest="10"
-                   BackgroundColor="Transparent"
-                   HorizontalOptions="FillAndExpand"/>
+            <!-- Filtrado por Estado de Pedido -->
+            <Label Text="No de Mesa"/>
+            <Picker Title="Seleccionar Mesa"
+             FontSize="12"
+             TextColor="Black"
+             BackgroundColor="Transparent"
+             HorizontalOptions="FillAndExpand"
+              SelectedItem="{Binding Numeromesa}">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:Int32}">
+                        <x:Int32>1</x:Int32>
+                        <x:Int32>2</x:Int32>
+                        <x:Int32>3</x:Int32>
+                        <x:Int32>4</x:Int32>
+                        <x:Int32>5</x:Int32>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
 
-            <!-- Carrusel de platos (cuadro gris por ahora) -->
-            <Frame BackgroundColor="LightGray"
-                   HeightRequest="100"
-                   CornerRadius="10">
-                <Label Text="Platos" 
-                       VerticalOptions="Center" 
-                       HorizontalOptions="Center"
-                       TextColor="Black"/>
-            </Frame>
 
-            <!-- Campo para la cantidad -->
-            <Entry Placeholder="Cantidad"
-                   PlaceholderColor="Gray"
-                   TextColor="Black"
-                   FontSize="12"
-                   HeightRequest="10"
-                   BackgroundColor="Transparent"
-                   HorizontalOptions="FillAndExpand"/>
+            <Picker Title="Seleccione un producto" BackgroundColor="Transparent"
+                ItemsSource="{Binding Producto}"
+                ItemDisplayBinding="{Binding Descripcion}"
+                SelectedItem="{Binding ProductoSeleccionado}" />
 
-            <!-- Botón para registrar pedido -->
-            <Button Text="Registrar Pedido"
-                    FontSize="13"
-                    BackgroundColor="Black"
-                    TextColor="White"
-                    CornerRadius="20"
-                    HeightRequest="35"
-                    HorizontalOptions="FillAndExpand"/>
+         
+            <!-- TextBox para mostrar el precio -->
+            <Label Text="Producto"/>
+            <Entry Text="{Binding Productop}" />
+            
+            <Label Text="Cantidad"/>
+            <Entry Text="{Binding Cantidad}" Keyboard="Numeric"/>
+            
+            <Label Text="Precio:" />
+            <Entry Text="{Binding Precio}" IsReadOnly="True" />
+
+           
+
+            <!-- Botón para Agregar Pedido -->
+            <Button Text="Agregar Pedido"
+               Command="{Binding AgregarPedidoCommand}" 
+               FontSize="13"
+               BackgroundColor="Black"
+               TextColor="White"
+               CornerRadius="20"
+               HeightRequest="35"
+               HorizontalOptions="FillAndExpand"/>
 
             <!-- Tabla para el pedido actual -->
-            <Label Text="Pedido Actual:" FontAttributes="Bold"/>
-            <CollectionView x:Name="pedidoActual" 
-                            HeightRequest="100">
-                <!-- Plantilla para mostrar el pedido actual -->
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Label Text="{Binding}" 
-                               TextColor="Black"/>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+            <Label Text="Pedidos actuales:" FontAttributes="Bold"/>
+            <Grid>
+                
+                <CollectionView ItemsSource="{Binding PedidosTemporales}" HeightRequest="150">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="*, *, *, *">
+                                <Label Text="{Binding Productop}" Grid.Column="0"/>
+                                <Label Text="{Binding Cantidad}" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                                <Label Text="{Binding Precio}" Grid.Column="2" HorizontalTextAlignment="Center"/>
+                                <Label Text="{Binding Importe}" Grid.Column="3" HorizontalTextAlignment="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </Grid>
+            <Grid ColumnDefinitions="*, Auto">
+                <!-- Label -->
+                <Label Text="Total" 
+           HorizontalTextAlignment="End"
+           Grid.Column="0" />
+
+                <!-- Entry -->
+                <Entry Text="{Binding Total}" 
+           HorizontalTextAlignment="End" 
+           HorizontalOptions="End" 
+           Grid.Column="1" />
+            </Grid>
+
+           
 
             <!-- Botón para finalizar pedido -->
             <Button Text="Finalizar Pedido"
+                    Command="{Binding CrearMesa}"
                     FontSize="13"
                     BackgroundColor="Black"
                     TextColor="White"

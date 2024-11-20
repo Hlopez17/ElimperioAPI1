@@ -11,14 +11,17 @@ namespace ElimperioAPI.Services
     public class MesaService
     {
         private readonly IMongoCollection<Mesa> _mesas;
-        private static int _contadorIdPedido = 1; // Inicia desde 1 (o el valor que prefieras)
         private readonly IMongoCollection<Pedido> _pedidos;
+
+        //private static int _Numeropedido = 1;
+        private static string _estado = "Pendiente";
 
         public MesaService(IOptions<ImperioDBsettings> mongoSettings)
         {
             var client = new MongoClient(mongoSettings.Value.CadenaConexion);
             var database = client.GetDatabase(mongoSettings.Value.NombreBaseDatos);
             _mesas = database.GetCollection<Mesa>("Mesas");
+         
         }
 
 
@@ -30,6 +33,7 @@ namespace ElimperioAPI.Services
 
         public async Task<Mesa> CreateMesaAsync(Mesa nuevaMesa)
         {
+            nuevaMesa.Estado = _estado;
             await _mesas.InsertOneAsync(nuevaMesa);
             return nuevaMesa;
         }
@@ -42,8 +46,8 @@ namespace ElimperioAPI.Services
         public async Task<Mesa> GetMesaByIdAsync(string id) =>
         await _mesas.Find<Mesa>(mesa => mesa.Id == id).FirstOrDefaultAsync();
 
+        
 
 
-      
     }
 }

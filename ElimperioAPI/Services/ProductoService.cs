@@ -18,9 +18,12 @@ namespace ElimperioAPI.Services
             _coleccionProducto= BaseDatos.GetCollection<Producto>("Productos");
         }
 
+        //Mostrar los productos en lista
         public async Task<List<Producto>> ObtenerAsync()=> await _coleccionProducto.Find(_ =>true).ToListAsync();
-        public async Task<Producto>ObtenerAsync(string id)=> await _coleccionProducto.Find(x => x.Id ==id).FirstOrDefaultAsync();
 
+        //Método de búsqueda por id
+        public async Task<Producto>ObtenerAsync(string id)=> await _coleccionProducto.Find(x => x.Id ==id).FirstOrDefaultAsync();
+        //Tarea Async para crear producto
         public async Task CrearAsync(Producto nuevoProducto)
         {
             await _coleccionProducto.InsertOneAsync(nuevoProducto);
@@ -38,6 +41,13 @@ namespace ElimperioAPI.Services
                 .Filter
                 .Eq(x => x.Id, id);
             await _coleccionProducto.DeleteOneAsync(filter);
+        }
+
+        public async Task<List<Producto>> BuscarPorNombreAsync(string nombre)
+        {
+            // Usar un filtro de búsqueda insensible a mayúsculas y minúsculas para coincidencias parciales
+            var filter = Builders<Producto>.Filter.Regex("Descripcion", new MongoDB.Bson.BsonRegularExpression(nombre, "i"));
+            return await _coleccionProducto.Find(filter).ToListAsync();
         }
     }
 }

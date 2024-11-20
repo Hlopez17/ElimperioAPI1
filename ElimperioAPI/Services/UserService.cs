@@ -9,7 +9,7 @@ namespace ElimperioAPI.Services
     public class UserService
     {
         private readonly IMongoCollection<User> _coleccionUsuarios;
-
+      
         public UserService(IOptions<ImperioDBsettings> ConfiguracionBD)
         {
             var clientemongo = new MongoClient(ConfiguracionBD.Value.CadenaConexion);

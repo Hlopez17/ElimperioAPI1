@@ -53,5 +53,23 @@ namespace ElimperioAPI.Controllers
             await _Productoservicios.EliminarAsync(id);
             return Ok("Producto Eliminado exitosamente.");
         }
+
+        [HttpGet("buscar")]
+        public async Task<ActionResult<List<Producto>>> BuscarPorNombre([FromQuery] string nombre)
+        {
+            if (string.IsNullOrEmpty(nombre))
+            {
+                return BadRequest("El nombre del producto es requerido para la búsqueda.");
+            }
+
+            var productos = await _Productoservicios.BuscarPorNombreAsync(nombre);
+
+            if (productos == null || productos.Count == 0)
+            {
+                return NotFound("No se encontraron productos con ese nombre.");
+            }
+            return Ok(productos);
+        }
+
     }
 }

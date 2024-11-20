@@ -32,8 +32,6 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
 
         private string _rol;
         
-
-
         public AuthViewModel(Page page)
         {
             _httpClient = new HttpClient();
@@ -46,7 +44,6 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
 
         [ObservableProperty]
         private string username;
-
         [ObservableProperty] 
         private string contraseña;
         [ObservableProperty]

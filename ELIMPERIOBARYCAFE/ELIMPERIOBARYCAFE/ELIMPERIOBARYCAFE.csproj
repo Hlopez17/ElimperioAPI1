@@ -118,9 +118,6 @@
 	  <MauiXaml Update="MVVM\View\NewPage1.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="MVVM\View\Pedidos.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="MVVM\View\PresentacionInicio.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
