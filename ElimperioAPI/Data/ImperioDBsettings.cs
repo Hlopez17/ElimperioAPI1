@@ -10,5 +10,6 @@
         public string ColeccionReserva {  get; set; } = null!;
         public string ColeccionProveedor {  get; set; } = null!;
         public string ColeccionMesas {  get; set; } = null!;
+        public string ColeccionCaja {  get; set; } = null!;
     }
 }

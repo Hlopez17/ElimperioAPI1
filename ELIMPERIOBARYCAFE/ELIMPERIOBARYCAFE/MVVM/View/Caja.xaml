@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ELIMPERIOBARYCAFE.MVVM.ViewModels"
              x:Class="ELIMPERIOBARYCAFE.Caja"
              BackgroundColor="White">
 
@@ -33,11 +34,33 @@
            VerticalOptions="Center" />
         </Frame>
 
-        <!-- Botón para seleccionar mesa -->
-        <Label Text="Detalles del Pedido" FontSize="20" HorizontalOptions="Center" />
-        <Button Text="Seleccionar Mesa" BackgroundColor="black"/>
+        <!-- Filtrado por Estado de Pedido --><!--
+        <Label Text="No de Mesa"/>
+        <Picker Title="Seleccionar Mesa"
+               FontSize="12"
+               TextColor="Black"
+               BackgroundColor="Transparent"
+               HorizontalOptions="FillAndExpand"
+                SelectedItem="{Binding Mesa}">
+                 <Picker.ItemsSource>
+                     <x:Array Type="{x:Type x:Int32}">
+                        <x:Int32>1</x:Int32>
+                        <x:Int32>2</x:Int32>
+                        <x:Int32>3</x:Int32>
+                        <x:Int32>4</x:Int32>
+                        <x:Int32>5</x:Int32>
+                     </x:Array>
+                 </Picker.ItemsSource>
+        </Picker>-->
 
 
+
+        <!-- Selección de Mesa -->
+        <Label Text="Selecciona una Mesa" FontAttributes="Bold" FontSize="16" />
+        <Picker Title="Mesas Pendientes"
+                ItemsSource="{Binding MesasPendientes}"
+                ItemDisplayBinding="{Binding NumeroMesa}"
+                SelectedItem="{Binding MesaSeleccionada}" />
         <!--Clicked="OnSeleccionarMesaClicked"-->
 
 
@@ -45,18 +68,42 @@
         <StackLayout Orientation="Vertical" Spacing="10">
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                 <Label Text="Total:" VerticalOptions="Center" />
-                <Entry x:Name="TotalEntry" Placeholder="0.00" Keyboard="Numeric" HorizontalOptions="EndAndExpand" WidthRequest="150" />
+                <Entry Text="{Binding MesaSeleccionada.Total}" IsReadOnly="True" HorizontalOptions="EndAndExpand" WidthRequest="150" />
+                <!--<Label Text="Descuento" VerticalOptions="Center" />
+                <Entry Text="{Binding Descuento}" IsReadOnly="True" HorizontalOptions="CenterAndExpand" WidthRequest="150" />-->
+
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <Label Text="Paga Con:" VerticalOptions="Center" />
-                <Entry x:Name="PagaConEntry" Placeholder="0.00" Keyboard="Numeric" HorizontalOptions="EndAndExpand" WidthRequest="150"  />
+                <!-- Selector de Tipo pago -->
+                
+                <Picker Title="Tipo Pago"
+                FontSize="12"
+                TextColor="Black"
+                BackgroundColor="Transparent"
+                HorizontalOptions="FillAndExpand"
+                SelectedItem="{Binding TipoPago}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Efectivo</x:String>
+                            <x:String>Transferencia</x:String>
+                            <x:String>Tarjeta</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+
+              
             </StackLayout>
             <!--TextChanged="OnPagaConChanged"-->
-
-            <!-- Dropdown para seleccionar moneda -->
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Label Text="Paga Con:                                    C$" VerticalOptions="Center" />
+                <Entry x:Name="PagaConEntry" Placeholder="0.00" Keyboard="Numeric" HorizontalOptions="EndAndExpand" WidthRequest="150"  />
+            </StackLayout>
+            
+            <!-- Dropdown para seleccionar moneda --><!--
             <Picker x:Name="MonedaPicker" Title="Seleccionar Moneda" >
-                <!--SelectedIndexChanged="OnMonedaChanged"-->
+                --><!--SelectedIndexChanged="OnMonedaChanged"--><!--
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>C$ (Córdoba)</x:String>
@@ -64,7 +111,7 @@
                         <x:String>€ (Euro)</x:String>
                     </x:Array>
                 </Picker.ItemsSource>
-            </Picker>
+            </Picker>-->
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                 <Label Text="Cambio:" VerticalOptions="Center" />
@@ -73,7 +120,7 @@
         </StackLayout>
 
         <!-- Botón para cobrar -->
-        <Button Text="Cobrar" BackgroundColor="black" TextColor="White"  />
+        <Button Text="Cobrar" BackgroundColor="black" TextColor="White"  Command="{Binding FinalizarPagoCommand}"/>
         <!--Clicked="OnCobrarClicked"-->
     </VerticalStackLayout>
 </ContentPage>

@@ -14,6 +14,7 @@ builder.Services.AddSingleton<UserService>();
 builder.Services.AddSingleton<ReservaServices>();
 builder.Services.AddSingleton<ProveedorService>();
 builder.Services.AddSingleton<MesaService>();
+builder.Services.AddSingleton<CajaService>();
 
 builder.Services.AddControllers()
 .AddJsonOptions(

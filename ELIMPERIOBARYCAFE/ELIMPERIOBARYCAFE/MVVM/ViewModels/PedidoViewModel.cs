@@ -33,6 +33,8 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
         private readonly string _token;
         private readonly string? _productoid;
 
+        public decimal TotalG => CalcularTotal();
+
         // Diccionario para almacenar pedidos temporales por mesa
         private readonly Dictionary<int, ObservableCollection<Pedido>> _pedidosPorMesa
             = new Dictionary<int, ObservableCollection<Pedido>>();
@@ -41,8 +43,6 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
         //Se define una variable que este relacionada con la clase producto
         private Producto _productoSeleccionado;
 
-        private int _mesaSeleccionada;
-       
         public Producto ProductoSeleccionado
         {
             get => _productoSeleccionado;
@@ -53,7 +53,8 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
                 RellenarCampos(); // Rellena los campos cuando se selecciona un producto
             }
         }
-
+        //Mesa seleccionada 
+        private int _mesaSeleccionada;
         public int MesaSeleccionada
         {
             get => _mesaSeleccionada;
@@ -90,9 +91,9 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
         [ObservableProperty]
         private int numeromesa;
         [ObservableProperty]
-        private DateTime fecha; 
+        private DateTime fecha;
         [ObservableProperty]
-        private int total;
+        private decimal total;
         //Datos de pedido
         [ObservableProperty]
         private string productop;
@@ -142,6 +143,11 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
             }
         }
 
+        private decimal CalcularTotal()
+        {
+            return PedidosTemporales.Sum(p => p.Importe);
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         //Función que permite que los datos cambien en "RellenarCampos"
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
@@ -158,7 +164,7 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
         {
             if (Cantidad <= 0 || Precio <= 0)
             {
-                // Alerta o validación opcional
+                 _page.DisplayAlert("Error", "Error al obtener productos", "OK");
                 return;
             }
 
@@ -175,31 +181,31 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
             PedidosTemporales.Add(pedido);
 
             // Estos es para limpiar los valores después de agregar
-            productop = string.Empty;
+            Productop = string.Empty;
             Cantidad = 0;
             Precio = 0;
-            OnPropertyChanged(nameof(Producto));
+            OnPropertyChanged(nameof(Productop));
             OnPropertyChanged(nameof(Cantidad));
             OnPropertyChanged(nameof(Precio));
-            OnPropertyChanged(nameof(total));
+            OnPropertyChanged(nameof(TotalG));
         }
 
         private void CargarPedidosTemporales()
         {
-            // Si hay pedidos guardados para esta mesa, cárgalos
+            // Si hay pedidos guardados para esta mesa, estos se cargan en base al número de mesa
             if (_pedidosPorMesa.TryGetValue(MesaSeleccionada, out var pedidos))
             {
                 PedidosTemporales = pedidos;
             }
             else
             {
-                // Si no hay pedidos, inicializa la lista para esta mesa
+                // Si no hay pedidos, entonces inicializa la lista para esta mesa
                 PedidosTemporales = new ObservableCollection<Pedido>();
                 _pedidosPorMesa[MesaSeleccionada] = PedidosTemporales;
             }
 
             OnPropertyChanged(nameof(PedidosTemporales));
-            OnPropertyChanged(nameof(Total));
+            OnPropertyChanged(nameof(TotalG));
         }
 
 
@@ -207,9 +213,9 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
         {
             var mesa = new Mesa
             {
-                NumeroMesa = MesaSeleccionada, // Cambiar según la lógica
+                NumeroMesa = Numeromesa, // Cambiar según la lógica
                 Pedidos1 = PedidosTemporales.ToList(),
-                Total = total,
+                Total = PedidosTemporales.Sum(p => p.Importe),
                 Fecha = DateTime.Now
             };
 
@@ -224,7 +230,7 @@ namespace ELIMPERIOBARYCAFE.MVVM.ViewModels
                     // Limpia los datos locales después de guardar
                     _pedidosPorMesa.Remove(MesaSeleccionada);
                     PedidosTemporales.Clear();
-                    OnPropertyChanged(nameof(total));
+                    OnPropertyChanged(nameof(TotalG));
                     // Mostrar un mensaje de éxito
                 }
                 else

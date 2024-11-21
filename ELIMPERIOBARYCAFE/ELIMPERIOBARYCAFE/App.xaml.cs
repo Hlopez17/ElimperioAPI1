@@ -9,7 +9,7 @@ namespace ELIMPERIOBARYCAFE
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new Mesero(token));
+            MainPage = new NavigationPage(new Caja(token));
         }
     }
 }

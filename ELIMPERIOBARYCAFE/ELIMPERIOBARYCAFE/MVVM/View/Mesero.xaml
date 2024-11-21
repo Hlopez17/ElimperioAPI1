@@ -34,7 +34,7 @@
              TextColor="Black"
              BackgroundColor="Transparent"
              HorizontalOptions="FillAndExpand"
-              SelectedItem="{Binding Numeromesa}">
+              SelectedItem="{Binding NumeroMesa}">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:Int32}">
                         <x:Int32>1</x:Int32>
@@ -55,7 +55,7 @@
          
             <!-- TextBox para mostrar el precio -->
             <Label Text="Producto"/>
-            <Entry Text="{Binding Productop}" />
+            <Entry Text="{Binding Productop}" IsReadOnly="True"/>
             
             <Label Text="Cantidad"/>
             <Entry Text="{Binding Cantidad}" Keyboard="Numeric"/>
@@ -100,7 +100,7 @@
            Grid.Column="0" />
 
                 <!-- Entry -->
-                <Entry Text="{Binding Total}" 
+                <Entry Text="{Binding TotalG}" 
            HorizontalTextAlignment="End" 
            HorizontalOptions="End" 
            Grid.Column="1" />
