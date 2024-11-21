@@ -25,6 +25,7 @@ namespace ElimperioAPI.Models
         public int Cantidad { get; set; }  // Cantidad solicitada
         public decimal Precio { get; set; }  // Precio del producto
         public decimal Importe { get; set; }  // Total acumulado de la mesa
+        public string Estado { get; set; } // Estado del pedido, "En proceso" sera por defecto.
     }
 }
 
